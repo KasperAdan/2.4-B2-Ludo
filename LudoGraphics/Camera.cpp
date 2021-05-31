@@ -26,5 +26,5 @@ void Camera::update(GLFWwindow*)
 void Camera::moveTo(glm::vec3 pos, glm::vec3 rot)
 {
 	position = pos;
-	rotation = rot;
+	rotation = glm::vec3(glm::radians(rot.x), glm::radians(rot.y), glm::radians(rot.z));
 }

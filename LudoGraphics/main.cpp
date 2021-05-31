@@ -65,7 +65,9 @@ void init()
     });
 
     camera = new DebugCamera(window);
+    camera->moveTo(glm::vec3(0, -10, 0), glm::vec3(90, 0, 0));
     Board* board = new Board();
+    board->scale = glm::vec3(5);
     drawables.push_back(board);
 
     for (auto& d : drawables) {
