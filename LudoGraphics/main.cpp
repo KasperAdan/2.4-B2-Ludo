@@ -8,6 +8,7 @@
 #include "Board.h"
 #include "DebugCamera.h"
 #include "Texture.h"
+#include "Pawn.h"
 
 using tigl::Vertex;
 
@@ -71,6 +72,14 @@ void init()
     Board* board = new Board(new Texture("ludo_game_board.jpg"));
     board->scale = glm::vec3(5);
     drawables.push_back(board);
+
+    for (int i = 0; i < 10; i++) {
+        Pawn* p = new Pawn();
+        p->position = glm::vec3(-5 + i, 1, -10);
+        p->scale = glm::vec3(0.2f);
+        drawables.push_back(p);
+    }
+    
 
     // Init all drawables
     for (auto& d : drawables) {
