@@ -5,7 +5,7 @@
 class Board : public Drawable
 {
 public:
-	Board();
+	Board(Texture*);
 	~Board();
 
 	virtual void init() override;

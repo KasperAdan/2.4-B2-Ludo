@@ -4,6 +4,12 @@
 
 Drawable::Drawable()
 {
+	texture = nullptr;
+}
+
+Drawable::Drawable(Texture* tex)
+{
+	texture = tex;
 }
 
 Drawable::~Drawable()

@@ -1,6 +1,5 @@
 #include "DebugCamera.h"
 #include <GLFW/glfw3.h>
-#include <iostream>
 
 DebugCamera::DebugCamera(GLFWwindow* window)
 {
@@ -44,8 +43,6 @@ void DebugCamera::update(GLFWwindow* window)
 		position.y -= 0.05f;
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 		position.y += 0.05f;
-
-	std::cout << "X: " << rotation.x << " Y: " << rotation.y;
 }
 
 void DebugCamera::move(float angle, float fac)

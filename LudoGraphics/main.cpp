@@ -1,5 +1,3 @@
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "tigl.h"
@@ -9,6 +7,7 @@
 #include "Camera.h"
 #include "Board.h"
 #include "DebugCamera.h"
+#include "Texture.h"
 
 using tigl::Vertex;
 
@@ -64,12 +63,16 @@ void init()
             glfwSetWindowShouldClose(window, true);
     });
 
+    // Create camera
     camera = new DebugCamera(window);
-    camera->moveTo(glm::vec3(0, -10, 0), glm::vec3(90, 0, 0));
-    Board* board = new Board();
+    camera->moveTo(glm::vec3(0, -8, -7), glm::vec3(45, 0, 0));
+
+    // Create board
+    Board* board = new Board(new Texture("ludo_game_board.jpg"));
     board->scale = glm::vec3(5);
     drawables.push_back(board);
 
+    // Init all drawables
     for (auto& d : drawables) {
         d->init();
     }
@@ -78,12 +81,14 @@ void init()
 
 void update()
 {
+    // Calculate time between this frame and last frame
     double currentTime = glfwGetTime();
     double deltaTime = currentTime - timeLastFrame;
     timeLastFrame = currentTime;
 
     camera->update(window);
 
+    // Update all drawables
     for (auto& d : drawables) {
         d->update(deltaTime);
     }
@@ -103,9 +108,11 @@ void draw()
     tigl::shader->setModelMatrix(glm::mat4(1.0f));
 
     tigl::shader->enableColor(true);
+    tigl::shader->enableTexture(true);
 
     glEnable(GL_DEPTH_TEST);
 
+    // Draw all drawables
     for (auto& d : drawables) {
         d->draw();
     }
