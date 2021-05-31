@@ -4,6 +4,9 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "Drawable.h"
+#include <list>
+
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -46,6 +49,8 @@ int main(void)
     return 0;
 }
 
+std::list<Drawable*> drawables;
+double timeLastFrame = 0;
 
 void init()
 {
@@ -55,16 +60,29 @@ void init()
             glfwSetWindowShouldClose(window, true);
     });
 
+    for (auto& d : drawables) {
+        d->init();
+    }
 }
 
 
 void update()
 {
+    double currentTime = glfwGetTime();
+    double deltaTime = currentTime - timeLastFrame;
+    timeLastFrame = currentTime;
 
+    for (auto& d : drawables) {
+        d->update(deltaTime);
+    }
 }
 
 void draw()
 {
     glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    for (auto& d : drawables) {
+        d->draw();
+    }
 }
