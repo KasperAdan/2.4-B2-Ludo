@@ -8,6 +8,7 @@ using tigl::Vertex;
 
 class Drawable
 {
+protected:
 	std::vector<Vertex> vertices;
 
 public:

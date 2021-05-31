@@ -7,6 +7,8 @@
 #include "Drawable.h"
 #include <list>
 #include "Camera.h"
+#include "Board.h"
+#include "DebugCamera.h"
 
 using tigl::Vertex;
 
@@ -62,7 +64,9 @@ void init()
             glfwSetWindowShouldClose(window, true);
     });
 
-    camera = new Camera();
+    camera = new DebugCamera(window);
+    Board* board = new Board();
+    drawables.push_back(board);
 
     for (auto& d : drawables) {
         d->init();
@@ -75,6 +79,8 @@ void update()
     double currentTime = glfwGetTime();
     double deltaTime = currentTime - timeLastFrame;
     timeLastFrame = currentTime;
+
+    camera->update(window);
 
     for (auto& d : drawables) {
         d->update(deltaTime);

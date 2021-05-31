@@ -19,6 +19,10 @@ glm::mat4 Camera::getViewMatrix()
 	return viewMatrix;
 }
 
+void Camera::update(GLFWwindow*)
+{
+}
+
 void Camera::moveTo(glm::vec3 pos, glm::vec3 rot)
 {
 	position = pos;
