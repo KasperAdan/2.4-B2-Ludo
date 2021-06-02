@@ -69,7 +69,7 @@ void init()
     camera->moveTo(glm::vec3(0, -8, -7), glm::vec3(45, 0, 0));
 
     // Create board
-    Board* board = new Board(new Texture("ludo_game_board.jpg"));
+    Board* board = new Board(new Texture("Resource/ludo_game_board.jpg"));
     board->scale = glm::vec3(5);
     drawables.push_back(board);
 
