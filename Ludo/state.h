@@ -1,5 +1,5 @@
 #pragma once
-enum state
+enum class state
 {
 	empty, 
 	blue, 

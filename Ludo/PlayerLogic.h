@@ -6,7 +6,7 @@ class PlayerLogic
 public:
 	state playerColor;
 	int boardOffset;
-	state finish[4] = { empty, empty, empty, empty };
+	state finish[4] = { state::empty, state::empty, state::empty, state::empty };
 	int homePawns = 4;
 
 
