@@ -17,6 +17,7 @@ public:
 
 private:
 	std::vector<int> getPawnLocations(state);
+	void spawnPawn(state);
 	bool movePawnCheck(int, int);
 	void movePawn(int, int);
 	PlayerLogic getPlayerByColor(state);

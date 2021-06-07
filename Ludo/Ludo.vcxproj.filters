@@ -92,10 +92,10 @@
     <ClInclude Include="PlayerLogic.h">
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
-    <ClInclude Include="state.h">
+    <ClInclude Include="GameLogic.h">
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
-    <ClInclude Include="GameLogic.h">
+    <ClInclude Include="state.h">
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
   </ItemGroup>

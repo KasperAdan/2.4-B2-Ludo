@@ -36,6 +36,21 @@ std::vector<int> BoardLogic::getPawnLocations(state player)
 	return locations;
 }
 
+void BoardLogic::spawnPawn(state color)
+{
+	PlayerLogic player = getPlayerByColor(color);
+	if (player.homePawns != 0)
+	{
+		player.removeHomePawn();
+		if (board[player.boardOffset] != state::empty)
+		{
+			PlayerLogic enemy = getPlayerByColor(board[player.boardOffset]);
+			enemy.addHomePawn();
+		}
+		board[player.boardOffset] = player.playerColor;
+	}
+}
+
 
 //this method checks if a move is possible
 //this can be used to check if the user can choose this pawn to move or not
