@@ -25,9 +25,9 @@ void draw();
 
 int main(void)
 {
-    dobble d = dobble();
+    //dobble d = dobble();
 
-   /* if (!glfwInit())
+    if (!glfwInit())
         throw "Could not initialize glwf";
     window = glfwCreateWindow(1400, 800, "Hello World", NULL, NULL);
     if (!window)
@@ -52,7 +52,7 @@ int main(void)
 	glfwTerminate();
 
 
-    return 0;*/
+    return 0;
 }
 
 std::list<Drawable*> drawables;
