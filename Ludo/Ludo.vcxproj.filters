@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Logic">
       <UniqueIdentifier>{ab007ba2-fea9-4e49-bed5-b9de763d6a36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Vision">
+      <UniqueIdentifier>{b6c7de50-1f42-4f27-8666-cb21e045f331}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tigl.cpp">
@@ -61,7 +64,10 @@
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
     <ClCompile Include="dobble.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Vision</Filter>
+    </ClCompile>
+    <ClCompile Include="handDetection.cpp">
+      <Filter>Source Files\Vision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +108,9 @@
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
     <ClInclude Include="dobble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="handDetection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

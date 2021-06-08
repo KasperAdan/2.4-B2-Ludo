@@ -10,6 +10,7 @@
 #include "Texture.h"
 #include "Pawn.h"
 #include "dobble.h"
+#include "handDetection.h"
 
 using tigl::Vertex;
 
@@ -25,7 +26,8 @@ void draw();
 
 int main(void)
 {
-    dobble d = dobble();
+    handDetection h = handDetection();
+    
 
    /* if (!glfwInit())
         throw "Could not initialize glwf";

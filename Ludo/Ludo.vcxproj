@@ -75,8 +75,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\openCV\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\openCV\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -168,6 +168,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="PlayerLogic.cpp" />
+    <ClCompile Include="handDetection.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="dobble.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="handDetection.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="PlayerLogic.h" />
     <ClInclude Include="state.h" />
