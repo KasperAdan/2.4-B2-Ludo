@@ -113,6 +113,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resource\test.json" />
   </ItemGroup>
 </Project>
