@@ -10,6 +10,7 @@
 #include "Texture.h"
 #include "Pawn.h"
 #include "dobble.h"
+#include "GameLogic.h"
 
 using tigl::Vertex;
 
@@ -25,6 +26,7 @@ void draw();
 
 int main(void)
 {
+    GameLogic game = GameLogic(4);
     //dobble d = dobble();
 
     if (!glfwInit())

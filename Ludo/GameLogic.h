@@ -2,6 +2,8 @@
 #include "BoardLogic.h"
 #include <iostream>
 #include <vector>
+#include <string>
+
 
 class GameLogic
 {
@@ -16,6 +18,8 @@ public:
 
 	void nextTurn();
 
-private:
+	
 
+private:
+	std::string getStringEnum(state);
 };
