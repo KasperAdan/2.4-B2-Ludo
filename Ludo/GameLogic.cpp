@@ -12,18 +12,78 @@ GameLogic::GameLogic(int amountOfPlayers)
 	running = true;
 	while (running)
 	{
+		board.printBoard();
+
 		//dobble (dobble detection)
-		int dobbleValue;
-		std::cin >> dobbleValue;
+		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your dobble value: ";
+		int dobbleValue = -1;
+		
+		while (dobbleValue > 6 ||  dobbleValue <= 0)
+		{
+			std::cin >> dobbleValue;
+		}
 
 		//get choices
 		std::vector<int> playerPawns = board.getPawnLocations(board.players[playerTurn]);
 
+		if (playerPawns.size() == 0 && dobbleValue != 6 )
+		{
+			nextTurn();
+			continue;
+		}
+
+		std::vector<int> possiblePawns;
+
+		if (dobbleValue == 6)
+		{
+			if (board.spawnPawnCheck(&board.players[playerTurn]))
+			{
+				possiblePawns.push_back(99);
+			}
+		}
+
+		for (int i : playerPawns)
+		{
+			if (board.movePawnCheck(i, dobbleValue))
+			{
+				possiblePawns.push_back(i);
+			}
+			
+		}
+
+		std::cout << "the pawns you can move are on position \n";
+		int j = 0;
+		for (int i : possiblePawns)
+		{
+			std::cout << "option "<< j << ": " << i << "\n";
+			j++;
+		}
+
+		if (possiblePawns.size() == 0)
+		{
+			nextTurn();
+			continue;
+		}
 
 		//choose option (finger detection)
+		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your selected option: ";
+		int pawnValue = -1;
+		while (pawnValue >= possiblePawns.size() || pawnValue < 0)
+		{
+			std::cin >> pawnValue;
+		}
 
 		//change board
-
+		if (possiblePawns[pawnValue] == 99)
+		{
+			//add new pawn on board
+			board.spawnPawn(&board.players[playerTurn]);
+		}
+		else
+		{
+			board.movePawn(possiblePawns[pawnValue], dobbleValue);
+		}
+		
 		//next player
 		nextTurn();
 	}
@@ -39,5 +99,29 @@ void GameLogic::nextTurn()
 	if (playerTurn >= board.players.size())
 	{
 		playerTurn = 0;
+	}
+}
+
+std::string GameLogic::getStringEnum(state color)
+{
+	switch (color)
+	{
+		case empty:
+			return "empty";
+			break;
+		case blue:
+			return "blue";
+			break;
+		case red:
+			return "red";
+			break;
+		case yellow:
+			return "yellow";
+			break;
+		case green:
+			return "green";
+			break;
+		default:
+			break;
 	}
 }

@@ -2,6 +2,7 @@
 #include "state.h"
 #include "PlayerLogic.h"
 #include <vector>
+#include <string>
 
 class BoardLogic
 {
@@ -15,11 +16,14 @@ public:
 	
 	std::vector<int> getPawnLocations(state);
 	std::vector<int> getPawnLocations(PlayerLogic);
-	void spawnPawn(state);
+	void spawnPawn(PlayerLogic *);
+	bool spawnPawnCheck(PlayerLogic*);
 	bool movePawnCheck(int, int);
 	void movePawn(int, int);
 	PlayerLogic getPlayerByColor(state);
+	PlayerLogic* getPlayerByColorPointer(state);
+	void printBoard();
 
 private:
-	
+	std::string getStringEnum(state);
 };

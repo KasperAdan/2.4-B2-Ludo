@@ -4,10 +4,11 @@ PlayerLogic::PlayerLogic()
 {
 }
 
-PlayerLogic::PlayerLogic(state color, int boardOffset)
+PlayerLogic::PlayerLogic(state color, int offset)
 {
 	playerColor = color;
-	boardOffset = boardOffset;
+	boardOffset = offset;
+	homePawns = 4;
 }
 
 PlayerLogic::~PlayerLogic()
