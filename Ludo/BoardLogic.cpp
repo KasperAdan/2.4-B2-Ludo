@@ -36,6 +36,20 @@ std::vector<int> BoardLogic::getPawnLocations(state player)
 	return locations;
 }
 
+//returns all the locations of the pawns of a player
+std::vector<int> BoardLogic::getPawnLocations(PlayerLogic player)
+{
+	std::vector<int> locations;
+	for (int i = 0; i < 40; i++)
+	{
+		if (board[i] == player.playerColor)
+		{
+			locations.push_back(i);
+		}
+	}
+	return locations;
+}
+
 void BoardLogic::spawnPawn(state color)
 {
 	PlayerLogic player = getPlayerByColor(color);

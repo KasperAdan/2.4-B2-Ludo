@@ -13,12 +13,13 @@ public:
 	BoardLogic(int);
 	~BoardLogic();
 	
-
-
-private:
 	std::vector<int> getPawnLocations(state);
+	std::vector<int> getPawnLocations(PlayerLogic);
 	void spawnPawn(state);
 	bool movePawnCheck(int, int);
 	void movePawn(int, int);
 	PlayerLogic getPlayerByColor(state);
+
+private:
+	
 };
