@@ -1,48 +1,18 @@
 #include "Pawn.h"
 
-Pawn::Pawn()
+Pawn::Pawn(ObjModel* model, glm::vec4 col)
 {
-	texture = nullptr;
-}
-
-Pawn::Pawn(Texture* tex)
-{
-	texture = tex;
+	objModel = model;
+	color = col;
 }
 
 Pawn::~Pawn()
 {
 }
 
-void Pawn::init()
+void Pawn::draw()
 {
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, 1)));
-	
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, -1)));
-
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, 1)));
-
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, 1)));
-
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, -1)));
-
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, -1)));
+	Drawable::draw();
+	objModel->setColor(color);
+	objModel->draw();
 }
