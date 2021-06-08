@@ -178,7 +178,8 @@ PlayerLogic* BoardLogic::getPlayerByColorPointer(state color)
 			return &players[i];
 		}
 	}
-	return &PlayerLogic(empty, 0);
+	PlayerLogic player = PlayerLogic(empty, 0);
+	return &player;
 }
 
 

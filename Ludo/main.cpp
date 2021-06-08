@@ -11,6 +11,8 @@
 #include "Pawn.h"
 #include "dobble.h"
 #include "GameLogic.h"
+#include "JSONLoader.h"
+#include "iostream"
 
 using tigl::Vertex;
 
@@ -28,6 +30,11 @@ int main(void)
 {
     GameLogic game = GameLogic(4);
     //dobble d = dobble();
+
+    JSONLoader* jsonLoader = new JSONLoader();
+    struct JSONLoader::boardPositions p;
+    struct JSONLoader::boardPositions* positions = &p;
+    jsonLoader->loadPositions(positions);
 
     if (!glfwInit())
         throw "Could not initialize glwf";
