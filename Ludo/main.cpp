@@ -55,7 +55,6 @@ int main(void)
 std::list<Drawable*> drawables;
 double timeLastFrame = 0;
 Camera* camera;
-Pawn* p;
 
 void init()
 {
@@ -76,26 +75,13 @@ void init()
 
     ObjModel* pawnModel = new ObjModel("Resource/pawn/pawn.obj");
 
-    glm::vec4 color;
-    for (int i = 0; i < 12; i++) {
-        Pawn* p = new Pawn(pawnModel);
-
-        p->position = glm::vec3(-5 + i, 1, -10);
-        p->scale = glm::vec3(0.1f);
-
-        drawables.push_back(p);
-    }
-    
-    Pawn* p1 = new Pawn(glm::vec3(-1, 0, 0));
-    p1->scale = glm::vec3(0.2f);
-    drawables.push_back(p1);
+    Pawn* p = new Pawn(pawnModel);
+    drawables.push_back(p);
 
     // Init all drawables
     for (auto& d : drawables) {
         d->init();
     }
-
-    p->attackTarget(p1->position);
 }
 
 

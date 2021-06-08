@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(ObjModel* model, glm::vec4 col)
+Pawn::Pawn(ObjModel* model, glm::vec4 col, glm::vec3 pos)
 {
 	objModel = model;
 	color = col;
@@ -9,17 +9,7 @@ Pawn::Pawn(ObjModel* model, glm::vec4 col)
 	moveTarget = position;
 	moveSpeed = 2.0f;
 	attackHeight = 0.8f;
-}
-
-Pawn::Pawn(glm::vec3 pos)
-{
-	position = pos;
-	texture = nullptr;
-	moveToTarget = false;
-	attacking = false;
-	moveTarget = position;
-	moveSpeed = 2.0f;
-	attackHeight = 1.5f;
+	scale = glm::vec3(0.2f);
 }
 
 Pawn::~Pawn()
@@ -69,6 +59,11 @@ void Pawn::moveTo(glm::vec3 target)
 bool Pawn::reachedTarget()
 {
 	return !moveToTarget;
+}
+
+bool Pawn::hasAttacked()
+{
+	return !attacking;
 }
 
 void Pawn::attackTarget(glm::vec3 target)

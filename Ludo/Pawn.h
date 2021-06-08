@@ -20,16 +20,15 @@ private:
 	float distanceToTarget(glm::vec3);
 
 public:
-	Pawn();
-	Pawn(glm::vec3);
-	Pawn(ObjModel*, glm::vec4 = glm::vec4(1,1,1,1));
+	Pawn(ObjModel*, glm::vec4 = glm::vec4(1,1,1,1), glm::vec3 = glm::vec3(0,0,0));
 	~Pawn();
 
-	virtual void init() override;
 	virtual void update(float deltaTime) override;
 	virtual void draw() override;
 	void moveTo(glm::vec3);
-	bool reachedTarget();
 	void attackTarget(glm::vec3);
+
+	bool reachedTarget();
+	bool hasAttacked();
 };
 
