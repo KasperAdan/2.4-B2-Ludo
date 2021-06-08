@@ -162,6 +162,7 @@
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="PlayerLogic.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DebugCamera.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="ObjModel.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="PlayerLogic.h" />

@@ -48,6 +48,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="ObjModel.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="tigl.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModel.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoardLogic.h">
       <Filter>Header Files\Logic</Filter>

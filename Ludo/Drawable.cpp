@@ -4,12 +4,6 @@
 
 Drawable::Drawable()
 {
-	texture = nullptr;
-}
-
-Drawable::Drawable(Texture* tex)
-{
-	texture = tex;
 }
 
 Drawable::~Drawable()
@@ -34,6 +28,4 @@ void Drawable::draw()
 	modelMatrix = glm::scale(modelMatrix, scale);
 
 	tigl::shader->setModelMatrix(modelMatrix);
-
-	tigl::drawVertices(GL_QUADS, vertices);
 }

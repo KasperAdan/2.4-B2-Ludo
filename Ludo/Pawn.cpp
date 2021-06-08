@@ -1,48 +1,109 @@
 #include "Pawn.h"
 
-Pawn::Pawn()
+Pawn::Pawn(ObjModel* model, glm::vec4 col, glm::vec3 pos)
 {
-	texture = nullptr;
-}
-
-Pawn::Pawn(Texture* tex)
-{
-	texture = tex;
+	objModel = model;
+	color = col;
+	moveToTarget = false;
+	attacking = false;
+	moveTarget = position;
+	moveSpeed = 2.0f;
+	attackHeight = 0.8f;
+	scale = glm::vec3(0.2f);
 }
 
 Pawn::~Pawn()
 {
 }
 
-void Pawn::init()
+void Pawn::draw()
 {
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, 1)));
-	
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, -1)));
+	Drawable::draw();
+	objModel->setColor(color);
+	objModel->draw();
+}
 
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, 1)));
+void Pawn::update(float deltaTime)
+{
+	if (moveToTarget) {
+		if (distanceToTarget(moveTarget) > 0.05f) {
+			// Move to target
+			position += directionToTarget(moveTarget) * deltaTime * moveSpeed;
+		}
+		else
+		{
+			// We reached our target
+			moveToTarget = false;
+			position = moveTarget;
+		}
+	}
+	else if (attacking)
+	{
+		if (distanceToTarget(glm::vec3(position.x, position.y - attackHeight, position.z)) > 0.05f) {
+			position += directionToTarget(glm::vec3(position.x, position.y - attackHeight, position.z)) * deltaTime * moveSpeed;
+		}
+		else {
+			attacking = false;
+			position = glm::vec3(position.x, position.y - attackHeight, position.z);
+			moveTarget = position;
+		}
+	}
+}
 
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, 1)));
+void Pawn::moveTo(glm::vec3 target)
+{
+	moveToTarget = true;
+	moveTarget = target;
+}
 
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, 1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, 1, -1)));
+bool Pawn::reachedTarget()
+{
+	return !moveToTarget;
+}
 
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, -1)));
-	vertices.push_back(Vertex::P(glm::vec3(-1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, 1)));
-	vertices.push_back(Vertex::P(glm::vec3(1, -1, -1)));
+bool Pawn::hasAttacked()
+{
+	return !attacking;
+}
+
+void Pawn::attackTarget(glm::vec3 target)
+{
+	// Go above the standing pawn
+	target.y += attackHeight;
+	moveTarget = target;
+
+	moveToTarget = true;
+	attacking = true;
+}
+
+glm::vec3 Pawn::directionToTarget(glm::vec3 target)
+{
+	// Calculate difference between position and target
+	glm::vec3 diff = glm::vec3(
+		target.x - position.x,
+		target.y - position.y,
+		target.z - position.z
+	);
+
+	// Normalize result and return
+	return glm::normalize(diff);
+}
+
+float Pawn::distanceToTarget(glm::vec3 target)
+{
+	// Calculate difference between position and target 
+	glm::vec3 diff = glm::vec3(
+		position.x - target.x,
+		position.y - target.y,
+		position.z - target.z
+	);
+
+	// Calculate the magnitude of the difference vector
+	float distance = glm::sqrt(
+		glm::pow(diff.x, 2.0f) + 
+		glm::pow(diff.y, 2.0f) + 
+		glm::pow(diff.z, 2.0f)
+	);
+
+	return distance;
 }

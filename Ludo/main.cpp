@@ -73,13 +73,10 @@ void init()
     board->scale = glm::vec3(5);
     drawables.push_back(board);
 
-    for (int i = 0; i < 10; i++) {
-        Pawn* p = new Pawn();
-        p->position = glm::vec3(-5 + i, 1, -10);
-        p->scale = glm::vec3(0.2f);
-        drawables.push_back(p);
-    }
-    
+    ObjModel* pawnModel = new ObjModel("Resource/pawn/pawn.obj");
+
+    Pawn* p = new Pawn(pawnModel);
+    drawables.push_back(p);
 
     // Init all drawables
     for (auto& d : drawables) {
@@ -118,6 +115,7 @@ void draw()
 
     tigl::shader->enableColor(true);
     tigl::shader->enableTexture(true);
+    tigl::shader->enableColorMult(true);
 
     glEnable(GL_DEPTH_TEST);
 
