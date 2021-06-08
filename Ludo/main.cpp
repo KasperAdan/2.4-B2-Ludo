@@ -9,6 +9,8 @@
 #include "DebugCamera.h"
 #include "Texture.h"
 #include "Pawn.h"
+#include "JSONLoader.h"
+#include "iostream"
 
 using tigl::Vertex;
 
@@ -24,6 +26,11 @@ void draw();
 
 int main(void)
 {
+    JSONLoader* jsonLoader = new JSONLoader();
+    struct JSONLoader::boardPositions p;
+    struct JSONLoader::boardPositions* positions = &p;
+    jsonLoader->loadPositions(positions);
+
     if (!glfwInit())
         throw "Could not initialize glwf";
     window = glfwCreateWindow(1400, 800, "Hello World", NULL, NULL);
