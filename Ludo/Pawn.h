@@ -13,6 +13,7 @@ private:
 	bool moveToTarget;
 	float moveSpeed;
 
+	glm::vec3 attackTarget;
 	bool attacking;
 	float attackHeight;
 
@@ -26,7 +27,8 @@ public:
 	virtual void update(float deltaTime) override;
 	virtual void draw() override;
 	void moveTo(glm::vec3);
-	void attackTarget(glm::vec3);
+	void attack(glm::vec3);
+	void returnToBase(glm::vec3);
 
 	bool reachedTarget();
 	bool hasAttacked();

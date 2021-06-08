@@ -58,6 +58,8 @@ int main(void)
 std::list<Drawable*> drawables;
 double timeLastFrame = 0;
 Camera* camera;
+Pawn* p;
+Pawn* p1;
 
 void init()
 {
@@ -78,16 +80,21 @@ void init()
 
     ObjModel* pawnModel = new ObjModel("Resource/pawn/pawn.obj");
 
-    Pawn* p = new Pawn(pawnModel);
+    p = new Pawn(pawnModel, glm::vec4(0, 0, 1, 1), glm::vec3(-1, 0, 0));
     drawables.push_back(p);
 
     // Init all drawables
     for (auto& d : drawables) {
         d->init();
     }
+
+    p1 = new Pawn(pawnModel, glm::vec4(1, 0, 0, 1), glm::vec3(2, 0, 0));
+    drawables.push_back(p1);
+
+    p->attack(p1->position);
 }
 
-
+bool done = false;
 void update()
 {
     // Calculate time between this frame and last frame
@@ -100,6 +107,11 @@ void update()
     // Update all drawables
     for (auto& d : drawables) {
         d->update(deltaTime);
+    }
+    
+    if (p->hasAttacked() && !done) {
+        done = true;
+        p1->returnToBase(glm::vec3(-4, 0, -4));
     }
 }
 

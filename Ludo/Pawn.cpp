@@ -1,14 +1,16 @@
 #include "Pawn.h"
+#include <iostream>
 
 Pawn::Pawn(ObjModel* model, glm::vec4 col, glm::vec3 pos)
 {
 	objModel = model;
 	color = col;
+	position = pos;
 	moveToTarget = false;
 	attacking = false;
 	moveTarget = position;
-	moveSpeed = 2.0f;
-	attackHeight = 0.8f;
+	moveSpeed = 1.25f;
+	attackHeight = 1.7f;
 	scale = glm::vec3(0.2f);
 }
 
@@ -35,17 +37,17 @@ void Pawn::update(float deltaTime)
 			// We reached our target
 			moveToTarget = false;
 			position = moveTarget;
-		}
-	}
-	else if (attacking)
-	{
-		if (distanceToTarget(glm::vec3(position.x, position.y - attackHeight, position.z)) > 0.05f) {
-			position += directionToTarget(glm::vec3(position.x, position.y - attackHeight, position.z)) * deltaTime * moveSpeed;
-		}
-		else {
-			attacking = false;
-			position = glm::vec3(position.x, position.y - attackHeight, position.z);
-			moveTarget = position;
+
+			// If we are attacking move again
+			if (attacking)
+			{
+				moveSpeed = 5.0f;
+				attacking = false;
+				moveTo(attackTarget);
+			}
+			// Else reset the move speed
+			else
+				moveSpeed = 1.25f;
 		}
 	}
 }
@@ -63,17 +65,23 @@ bool Pawn::reachedTarget()
 
 bool Pawn::hasAttacked()
 {
-	return !attacking;
+	return !attacking && !moveToTarget;
 }
 
-void Pawn::attackTarget(glm::vec3 target)
+void Pawn::attack(glm::vec3 target)
 {
-	// Go above the standing pawn
-	target.y += attackHeight;
-	moveTarget = target;
-
-	moveToTarget = true;
 	attacking = true;
+	attackTarget = target;
+
+	// Go above the attacked pawn
+	target.y += attackHeight;
+	moveTo(target);
+}
+
+void Pawn::returnToBase(glm::vec3 basePosition)
+{
+	moveSpeed = 10.0f;
+	moveTo(basePosition);
 }
 
 glm::vec3 Pawn::directionToTarget(glm::vec3 target)
