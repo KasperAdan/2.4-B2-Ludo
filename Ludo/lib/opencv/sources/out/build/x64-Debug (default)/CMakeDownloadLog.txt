@@ -1,0 +1,7 @@
+#use_cache "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/.cache"
+#do_unpack "ippicv_2020_win_intel64_20191018_general.zip" "879741a7946b814455eee6c6ffde2984" "https://raw.githubusercontent.com/opencv/opencv_3rdparty/a56b6ac6f030c312b2dce17430eef13aed9af274/ippicv/ippicv_2020_win_intel64_20191018_general.zip" "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/3rdparty/ippicv"
+#cmake_download "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/.cache/ippicv/879741a7946b814455eee6c6ffde2984-ippicv_2020_win_intel64_20191018_general.zip" "https://raw.githubusercontent.com/opencv/opencv_3rdparty/a56b6ac6f030c312b2dce17430eef13aed9af274/ippicv/ippicv_2020_win_intel64_20191018_general.zip"
+#try 1
+#check_md5 "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/.cache/ippicv/879741a7946b814455eee6c6ffde2984-ippicv_2020_win_intel64_20191018_general.zip"
+#mkdir "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/3rdparty/ippicv"
+#unpack "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/3rdparty/ippicv" "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/.cache/ippicv/879741a7946b814455eee6c6ffde2984-ippicv_2020_win_intel64_20191018_general.zip"
