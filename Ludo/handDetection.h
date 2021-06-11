@@ -15,7 +15,7 @@ public:
 	std::string getCommand(VideoCapture vCapture);
 
 private:
-	void morphologicalImgProc(Mat& frame);
+	void noiseReduction(Mat& frame);
 	std::string integerToString(int num);
 	int angleToCenter(const Point& v1, const Point& v2);
 	//	string doAction(int totalAngleOfFinger, int fingerSize);
