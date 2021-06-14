@@ -12,7 +12,8 @@
 #include "dobble.h"
 #include "GameLogic.h"
 #include "JSONLoader.h"
-#include "iostream"
+#include <iostream>
+#include <thread>
 
 using tigl::Vertex;
 
@@ -25,40 +26,47 @@ GLFWwindow* window;
 void init();
 void update();
 void draw();
+void gameThread();
+
+GameLogic game;
 
 int main(void)
 {
-    GameLogic game = GameLogic(4);
+    //JSONLoader* jsonLoader = new JSONLoader();
+    //struct JSONLoader::boardPositions p;
+    //struct JSONLoader::boardPositions* positions = &p;
+    //jsonLoader->loadPositions(positions);
+
+    game = GameLogic(4);
     //dobble d = dobble();
 
-    JSONLoader* jsonLoader = new JSONLoader();
-    struct JSONLoader::boardPositions p;
-    struct JSONLoader::boardPositions* positions = &p;
-    jsonLoader->loadPositions(positions);
+ //   if (!glfwInit())
+ //       throw "Could not initialize glwf";
+ //   window = glfwCreateWindow(1400, 800, "Hello World", NULL, NULL);
+ //   if (!window)
+ //   {
+ //       glfwTerminate();
+ //       throw "Could not initialize glwf";
+ //   }
+ //   glfwMakeContextCurrent(window);
 
-    if (!glfwInit())
-        throw "Could not initialize glwf";
-    window = glfwCreateWindow(1400, 800, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        throw "Could not initialize glwf";
-    }
-    glfwMakeContextCurrent(window);
+ //   tigl::init();
 
-    tigl::init();
+ //   init();
 
-    init();
+ //   std::thread t1 = std::thread(&gameThread);
 
-	while (!glfwWindowShouldClose(window))
-	{
-		update();
-		draw();
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
+	//while (!glfwWindowShouldClose(window))
+	//{
+	//	update();
+	//	draw();
+	//	glfwSwapBuffers(window);
+	//	glfwPollEvents();
+	//}
 
-	glfwTerminate();
+ //   game.running = false;
+ //   t1.join();
+	//glfwTerminate();
 
 
     return 0;
@@ -67,8 +75,6 @@ int main(void)
 std::list<Drawable*> drawables;
 double timeLastFrame = 0;
 Camera* camera;
-Pawn* p;
-Pawn* p1;
 
 void init()
 {
@@ -88,22 +94,43 @@ void init()
     drawables.push_back(board);
 
     ObjModel* pawnModel = new ObjModel("Resource/pawn/pawn.obj");
+    std::vector<Pawn*> pawns (16);
 
-    p = new Pawn(pawnModel, glm::vec4(0, 0, 1, 1), glm::vec3(-1, 0, 0));
-    drawables.push_back(p);
+    for (int i = 0; i < 16; i++) {
+        glm::vec4 color;
+        glm::vec3 pos = glm::vec3(0, 0, 0);
+        if (i < 4) {
+            color = glm::vec4(0, 0, 1, 1);
+        }
+        else if (i < 8) {
+            color = glm::vec4(1, 0, 0, 1);
+        }
+        else if (i < 12) {
+            color = glm::vec4(1, 1, 0, 1);
+        }
+        else {
+            color = glm::vec4(0, 1, 0, 1);
+        }
+
+        Pawn* p = new Pawn(pawnModel, color, pos);
+        drawables.push_back(p);
+        pawns.push_back(p);
+    }
+
+    
 
     // Init all drawables
     for (auto& d : drawables) {
         d->init();
     }
-
-    p1 = new Pawn(pawnModel, glm::vec4(1, 0, 0, 1), glm::vec3(2, 0, 0));
-    drawables.push_back(p1);
-
-    p->attack(p1->position);
 }
 
-bool done = false;
+void gameThread() {
+    while (game.running) {
+        game.update();
+    }
+}
+
 void update()
 {
     // Calculate time between this frame and last frame
@@ -116,11 +143,6 @@ void update()
     // Update all drawables
     for (auto& d : drawables) {
         d->update(deltaTime);
-    }
-    
-    if (p->hasAttacked() && !done) {
-        done = true;
-        p1->returnToBase(glm::vec3(-4, 0, -4));
     }
 }
 

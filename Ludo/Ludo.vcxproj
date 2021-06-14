@@ -168,6 +168,7 @@
     <ClCompile Include="dobble.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="JSONLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjModel.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="DebugCamera.h" />
     <ClInclude Include="dobble.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Graphics.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="JSONLoader.h" />

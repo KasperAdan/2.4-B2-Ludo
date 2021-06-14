@@ -3,12 +3,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include "Pawn.h"
+#include "Graphics.h"
 
 class GameLogic
 {
 public:
-	BoardLogic board;
+	//BoardLogic board;
+	//Graphics graphics;
 	int playerTurn;
 	bool running;
 
@@ -17,8 +19,7 @@ public:
 	~GameLogic();
 
 	void nextTurn();
-
-	
+	void update();
 
 private:
 	std::string getStringEnum(state);

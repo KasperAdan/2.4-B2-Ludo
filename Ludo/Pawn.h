@@ -32,5 +32,7 @@ public:
 
 	bool reachedTarget();
 	bool hasAttacked();
+
+	bool atBase;
 };
 

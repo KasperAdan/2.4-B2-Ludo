@@ -57,7 +57,7 @@ std::vector<int> BoardLogic::getPawnLocations(PlayerLogic player)
 	return locations;
 }
 
-void BoardLogic::spawnPawn(PlayerLogic *player)
+void BoardLogic::spawnPawn(PlayerLogic *player, Graphics gph)
 {
 	if (player->homePawns != 0)
 	{
@@ -66,7 +66,11 @@ void BoardLogic::spawnPawn(PlayerLogic *player)
 		{
 			PlayerLogic enemy = getPlayerByColor(board[player->boardOffset]);
 			enemy.addHomePawn();
+			gph.moveFromBase(player->playerColor, player->boardOffset, true);
 		}
+		else
+			gph.moveFromBase(player->playerColor, player->boardOffset, false);
+		
 		board[player->boardOffset] = player->playerColor;
 	}
 }
@@ -115,7 +119,7 @@ bool BoardLogic::movePawnCheck(int location, int amount)
 }
 
 //this method moves the selected pawn
-void BoardLogic::movePawn(int location, int amount)
+void BoardLogic::movePawn(int location, int amount, Graphics gph)
 {
 	PlayerLogic *player = getPlayerByColorPointer(board[location]);
 	bool reachesFinish = false;
@@ -150,6 +154,10 @@ void BoardLogic::movePawn(int location, int amount)
 		state enemyColor = board[(location + amount) % 40];
 		PlayerLogic* enemy = getPlayerByColorPointer(enemyColor);
 		enemy->homePawns++;
+		gph.attackPawn(location, (location + amount) % 40, enemy->playerColor);
+	}
+	else {
+		gph.movePawn(location, (location + amount) % 40);
 	}
 	board[(location + amount) % 40] = player->playerColor;
 	board[location] = state::empty;

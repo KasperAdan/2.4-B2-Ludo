@@ -12,6 +12,7 @@ Pawn::Pawn(ObjModel* model, glm::vec4 col, glm::vec3 pos)
 	moveSpeed = 1.25f;
 	attackHeight = 1.7f;
 	scale = glm::vec3(0.2f);
+	atBase = true;
 }
 
 Pawn::~Pawn()
