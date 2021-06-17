@@ -13,6 +13,12 @@ dobble::dobble()
     VideoCapture webcam;
     webcam.open(0);
 
+    int loop_equal = 0;
+    int previous_equal = 0;
+    int full_zero_check = 0;
+    int TOTAL_LOOPS = 20;
+    int lastDiceCounts[6] = { 0, 0, 0, 0, 0, 0 };
+    int diceCounts[6] = { 0, 0, 0, 0, 0, 0 };
     while (1) {
         Mat image, grayImage, cannyImage;
         webcam.read(image);
@@ -122,6 +128,44 @@ dobble::dobble()
             }
         }
 
+        previous_equal = 0;
+        full_zero_check = 0;
+
+        //Array equal checl
+        for (int i = 0; i < 6; i++) {
+
+            //Look if the two arrays are equal
+            if (lastDiceCounts[i] == diceCounts[i]) {
+                previous_equal++;
+            }
+            else previous_equal = 0;
+
+            //If equal arrays
+            if (previous_equal == 6) {
+                loop_equal++;
+            }
+
+            //Checks if its is not an empty array
+            if (diceCounts[i] == 0) {
+                full_zero_check++;
+            }
+            else full_zero_check = 0;
+
+            //If empty array, equal assertion fails
+            if (full_zero_check == 6) {
+                loop_equal = 0;
+            }
+        }
+        //If the total loops is reached, break the while loop
+        if (loop_equal == TOTAL_LOOPS) {
+            break;
+        }
+
+        //If the arrays are not equal, the loop was not equal with the previous
+        if (previous_equal != 6) {
+            loop_equal = 0;
+        }
+
         //Display dot count
         for (int i = 0; i < 6; i++) {
 
@@ -129,6 +173,7 @@ dobble::dobble()
             count += diceCounts[i];
             sprintf_s(text, "%d: %d", (i + 1), count);
             putText(image, text, Point(20, 55 + 25 * i), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
+            lastDiceCounts[i] = diceCounts[i];
         }
 
         imshow("Canny", cannyImage);
@@ -136,6 +181,7 @@ dobble::dobble()
 
         waitKey(1);
     }
+    //return diceCounts;
 }
 
 dobble::~dobble()

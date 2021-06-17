@@ -26,7 +26,8 @@ void draw();
 
 int main(void)
 {
-    handDetection h = handDetection();
+    dobble d = dobble();
+    //handDetection h = handDetection();
     
 
    /* if (!glfwInit())
