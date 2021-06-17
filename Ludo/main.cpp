@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 #include "Drawable.h"
 #include <list>
 #include "Camera.h"
@@ -28,8 +29,10 @@ int main(void)
 {
     Dobble d = Dobble(0);
     int diceFound = d.findDice();
+    cout << diceFound;
 
-    d.findDice();
+    diceFound = d.findDice();
+    cout << diceFound;
     //handDetection h = handDetection();
     
 

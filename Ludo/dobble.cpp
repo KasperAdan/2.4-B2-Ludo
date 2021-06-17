@@ -81,8 +81,9 @@ int Dobble::findDice() {
         putText(image, text, Point(20, 30), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
 
         // Counting dots of each die
-        int diceCounts[6] = { 0, 0, 0, 0, 0, 0 };
+        fill_n(diceCounts, 6, 0);
         int totalDiceDots = 0;
+        
         for (int i = 0; i < diceRects.size(); i++) {
 
             totalDiceDots = 0;
@@ -137,7 +138,8 @@ int Dobble::findDice() {
         previous_equal = 0;
         full_zero_check = 0;
 
-        //Array equal checl
+        //Checks if dice are equal and we need to break the loop
+        //Array equal check
         for (int i = 0; i < 6; i++) {
 
             //Look if the two arrays are equal
@@ -162,8 +164,9 @@ int Dobble::findDice() {
                 loop_equal = 0;
             }
         }
+
         //If the total loops is reached, break the while loop
-        if (loop_equal == TOTAL_LOOPS) {
+        if (loop_equal >= TOTAL_LOOPS) {
             break;
         }
 
