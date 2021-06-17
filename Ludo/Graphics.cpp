@@ -15,6 +15,7 @@
 #include <iostream>
 #include <thread>
 #include "Graphics.h"
+#include <functional>
 
 using tigl::Vertex;
 
@@ -118,13 +119,10 @@ void Graphics::init()
             pos = positions->greenStartPositions[i - 12];
         }
 
-        Pawn* p = new Pawn(pawnModel, color, pos);
+        Pawn* p = new Pawn(this, pawnModel, color, pos);
         drawables.push_back(p);
         pawns.push_back(p);
     }
-
-    Pawn* p = new Pawn(pawnModel, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0));
-    drawables.push_back(p);
 
     // Init all drawables
     for (auto& d : drawables) {
@@ -195,8 +193,7 @@ void Graphics::moveFromBase(state color, int pos, bool attacking, state enemyCol
             pawns.at(pawnIndex)->atBase = false;
 
             if (attacking) {
-                pawns.at(pawnIndex)->attack(positions->playPositions[pos]);
-                returnToBase(pos, enemyColor);
+                pawns.at(pawnIndex)->attack(positions->playPositions[pos], pos, enemyColor);
             }
             else {
                 pawns.at(pawnIndex)->moveTo(positions->playPositions[pos]);
@@ -205,12 +202,6 @@ void Graphics::moveFromBase(state color, int pos, bool attacking, state enemyCol
             break;
         }
     }
-}
-
-void Graphics::movePawn(int pawn, glm::vec3 target)
-{
-    Pawn* p = (Pawn*)pawns.at(pawn);
-    p->moveTo(target);
 }
 
 void Graphics::movePawn(int pawnPos, int targetPos)
@@ -222,18 +213,11 @@ void Graphics::movePawn(int pawnPos, int targetPos)
     }
 }
 
-void Graphics::attackPawn(int pawn, glm::vec3 target)
-{
-    Pawn* p = (Pawn*)pawns.at(pawn);
-    p->attack(target);
-}
-
 void Graphics::attackPawn(int pawnPos, int targetPos, state enemyColor)
 {
     for (auto& p : pawns) {
         if (p->position == positions->playPositions[pawnPos]) {
-            p->attack(positions->playPositions[targetPos]);
-            returnToBase(targetPos, enemyColor);
+            p->attack(positions->playPositions[targetPos], targetPos, enemyColor);
         }
     }
 }

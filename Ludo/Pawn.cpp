@@ -1,7 +1,8 @@
 #include "Pawn.h"
 #include <iostream>
+#include "Graphics.h"
 
-Pawn::Pawn(ObjModel* model, glm::vec4 col, glm::vec3 pos)
+Pawn::Pawn(Graphics* graphics, ObjModel* model, glm::vec4 col, glm::vec3 pos)
 {
 	objModel = model;
 	color = col;
@@ -13,6 +14,7 @@ Pawn::Pawn(ObjModel* model, glm::vec4 col, glm::vec3 pos)
 	attackHeight = 1.7f;
 	scale = glm::vec3(0.2f);
 	atBase = true;
+	gph = graphics;
 }
 
 Pawn::~Pawn()
@@ -45,6 +47,7 @@ void Pawn::update(float deltaTime)
 				moveSpeed = 5.0f;
 				attacking = false;
 				moveTo(attackTarget);
+				gph->returnToBase(enemyIndex, enemyColor);
 			}
 			// Else reset the move speed
 			else
@@ -69,10 +72,12 @@ bool Pawn::hasAttacked()
 	return !attacking && !moveToTarget;
 }
 
-void Pawn::attack(glm::vec3 target)
+void Pawn::attack(glm::vec3 target, int eIndex, state enemyCol)
 {
 	attacking = true;
 	attackTarget = target;
+	enemyIndex = eIndex;
+	enemyColor = enemyCol;
 
 	// Go above the attacked pawn
 	target.y += attackHeight;

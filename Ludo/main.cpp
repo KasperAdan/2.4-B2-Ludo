@@ -112,9 +112,9 @@ void init()
             color = glm::vec4(0, 1, 0, 1);
         }
 
-        Pawn* p = new Pawn(pawnModel, color, pos);
-        drawables.push_back(p);
-        pawns.push_back(p);
+        //Pawn* p = new Pawn(this, pawnModel, color, pos);
+        //drawables.push_back(p);
+        //pawns.push_back(p);
     }
 
     
