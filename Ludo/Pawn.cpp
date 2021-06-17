@@ -81,7 +81,7 @@ void Pawn::attack(glm::vec3 target)
 
 void Pawn::returnToBase(glm::vec3 basePosition)
 {
-	moveSpeed = 10.0f;
+	moveSpeed = 8.0f;
 	moveTo(basePosition);
 }
 

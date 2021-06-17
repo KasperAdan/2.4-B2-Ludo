@@ -4,6 +4,6 @@ enum state
 	empty, 
 	blue, 
 	red, 
-	yellow, 
-	green
+	green,
+	yellow
 };

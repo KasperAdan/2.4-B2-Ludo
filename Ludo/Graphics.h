@@ -35,7 +35,7 @@ public:
 	void update();
 	void draw();
 
-	void moveFromBase(state, int, bool);
+	void moveFromBase(state, int, bool, state);
 	void movePawn(int, glm::vec3);
 	void movePawn(int, int);
 	void attackPawn(int, glm::vec3);
@@ -43,5 +43,6 @@ public:
 	void returnToBase(int, state);
 	bool isMoving(int);
 	bool isAttacking(int);
+	void finishPawn(state, int, int);
 };
 

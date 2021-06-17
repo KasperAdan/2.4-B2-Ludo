@@ -22,7 +22,7 @@ using tigl::Vertex;
 #pragma comment(lib, "glew32s.lib")
 #pragma comment(lib, "opengl32.lib")
 
-struct JSONLoader::boardPositions positions;
+struct JSONLoader::boardPositions* positions;
 
 
 Graphics::Graphics()
@@ -30,22 +30,21 @@ Graphics::Graphics()
     //game = GameLogic(4);
     //dobble d = dobble();
 
-    //JSONLoader* jsonLoader = new JSONLoader();
-    //struct JSONLoader::boardPositions p;
-    //struct JSONLoader::boardPositions* positions = &p;
-    //jsonLoader->loadPositions(positions);
+    JSONLoader* jsonLoader = new JSONLoader();
+    positions = new struct JSONLoader::boardPositions();
+    jsonLoader->loadPositions(positions);
 
-    for (int i = 0; i < 40; i++)
-        positions.playPositions[i] = glm::vec3(-8 + (0.5f * i), 0, 0);
+    //for (int i = 0; i < 40; i++)
+    //    positions.playPositions[i] = glm::vec3(-8 + (0.5f * i), 0, 0);
 
-    for (int i = 0; i < 4; i++)
-        positions.blueStartPositions[i] = glm::vec3(-4, 0, -5 + (i * 0.5f));
-    for (int i = 0; i < 4; i++)
-        positions.redStartPositions[i] = glm::vec3(-2, 0, -5 + (i * 0.5f));
-    for (int i = 0; i < 4; i++)
-        positions.yellowStartPositions[i] = glm::vec3(0, 0, -5 + (i * 0.5f));
-    for (int i = 0; i < 4; i++)
-        positions.greenStartPositions[i] = glm::vec3(2, 0, -5 + (i * 0.5f));
+    //for (int i = 0; i < 4; i++)
+    //    positions.blueStartPositions[i] = glm::vec3(-4, 0, -5 + (i * 0.5f));
+    //for (int i = 0; i < 4; i++)
+    //    positions.redStartPositions[i] = glm::vec3(-2, 0, -5 + (i * 0.5f));
+    //for (int i = 0; i < 4; i++)
+    //    positions.yellowStartPositions[i] = glm::vec3(0, 0, -5 + (i * 0.5f));
+    //for (int i = 0; i < 4; i++)
+    //    positions.greenStartPositions[i] = glm::vec3(2, 0, -5 + (i * 0.5f));
 }
 
 Graphics::~Graphics()
@@ -93,6 +92,7 @@ void Graphics::init()
 
     // Create board
     Board* board = new Board(new Texture("Resource/ludo_game_board.jpg"));
+    board->position = glm::vec3(7.28f, 0, 5.0f);
     board->scale = glm::vec3(5);
     drawables.push_back(board);
 
@@ -103,25 +103,28 @@ void Graphics::init()
         glm::vec3 pos = glm::vec3(0, 0, 0);
         if (i < 4) {
             color = glm::vec4(0, 0, 1, 1);
-            pos = positions.blueStartPositions[i];
+            pos = positions->blueStartPositions[i];
         }
         else if (i < 8) {
             color = glm::vec4(1, 0, 0, 1);
-            pos = positions.redStartPositions[i - 4];
+            pos = positions->redStartPositions[i - 4];
         }
         else if (i < 12) {
             color = glm::vec4(1, 1, 0, 1);
-            pos = positions.yellowStartPositions[i - 8];
+            pos = positions->yellowStartPositions[i - 8];
         }
         else {
             color = glm::vec4(0, 1, 0, 1);
-            pos = positions.greenStartPositions[i - 12];
+            pos = positions->greenStartPositions[i - 12];
         }
 
         Pawn* p = new Pawn(pawnModel, color, pos);
         drawables.push_back(p);
         pawns.push_back(p);
     }
+
+    Pawn* p = new Pawn(pawnModel, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0));
+    drawables.push_back(p);
 
     // Init all drawables
     for (auto& d : drawables) {
@@ -169,7 +172,7 @@ void Graphics::draw()
     }
 }
 
-void Graphics::moveFromBase(state color, int pos, bool attacking)
+void Graphics::moveFromBase(state color, int pos, bool attacking, state enemyColor)
 {
     int pawnIndex = 0;
     switch (color) {
@@ -192,10 +195,11 @@ void Graphics::moveFromBase(state color, int pos, bool attacking)
             pawns.at(pawnIndex)->atBase = false;
 
             if (attacking) {
-                pawns.at(pawnIndex)->attack(positions.playPositions[pos]);
+                pawns.at(pawnIndex)->attack(positions->playPositions[pos]);
+                returnToBase(pos, enemyColor);
             }
             else {
-                pawns.at(pawnIndex)->moveTo(positions.playPositions[pos]);
+                pawns.at(pawnIndex)->moveTo(positions->playPositions[pos]);
             }
 
             break;
@@ -212,8 +216,8 @@ void Graphics::movePawn(int pawn, glm::vec3 target)
 void Graphics::movePawn(int pawnPos, int targetPos)
 {
     for (auto& p : pawns) {
-        if (p->position == positions.playPositions[pawnPos]) {
-            p->moveTo(positions.playPositions[targetPos]);
+        if (p->position == positions->playPositions[pawnPos]) {
+            p->moveTo(positions->playPositions[targetPos]);
         }
     }
 }
@@ -227,8 +231,8 @@ void Graphics::attackPawn(int pawn, glm::vec3 target)
 void Graphics::attackPawn(int pawnPos, int targetPos, state enemyColor)
 {
     for (auto& p : pawns) {
-        if (p->position == positions.playPositions[pawnPos]) {
-            p->attack(positions.playPositions[targetPos]);
+        if (p->position == positions->playPositions[pawnPos]) {
+            p->attack(positions->playPositions[targetPos]);
             returnToBase(targetPos, enemyColor);
         }
     }
@@ -237,7 +241,7 @@ void Graphics::attackPawn(int pawnPos, int targetPos, state enemyColor)
 bool Graphics::isMoving(int pawn)
 {
     for (auto& p : pawns) {
-        if (p->position == positions.playPositions[pawn]) {
+        if (p->position == positions->playPositions[pawn]) {
             return !p->reachedTarget();
         }
     }
@@ -251,54 +255,110 @@ bool Graphics::isAttacking(int pawn)
 
 void Graphics::returnToBase(int pawnPos, state color)
 {
+    bool foundPawn = false;
     for (auto& p : pawns) {
-        if (p->position == positions.playPositions[pawnPos]) {
+        if (p->position == positions->playPositions[pawnPos]) {
             switch (color) {
             case state::blue:
                 for (int i = 0; i < 4; i++) {
                     for (int pw = 0; pw < 4; pw++) {
-                        if (pawns.at(pw)->position == positions.blueStartPositions[i]) {
+                        if (pawns.at(pw)->position == positions->blueStartPositions[i]) {
+                            foundPawn = true;
                             break;
                         }
                     }
-                    p->returnToBase(positions.blueStartPositions[i]);
-                    return;
+                    if (foundPawn) {
+                        foundPawn = false;
+                        continue;
+                    }
+                    else {
+                        p->atBase = true;
+                        p->returnToBase(positions->blueStartPositions[i]);
+                        return;
+                    }
                 }
                 break;
             case state::red:
                 for (int i = 0; i < 4; i++) {
                     for (int pw = 4; pw < 8; pw++) {
-                        if (pawns.at(pw)->position == positions.redStartPositions[i]) {
+                        if (pawns.at(pw)->position == positions->redStartPositions[i]) {
+                            foundPawn = true;
                             break;
                         }
                     }
-                    p->returnToBase(positions.redStartPositions[i]);
-                    return;
+                    if (foundPawn) {
+                        foundPawn = false;
+                        continue;
+                    }
+                    else {
+                        p->atBase = true;
+                        p->returnToBase(positions->redStartPositions[i]);
+                        return;
+                    }
                 }
                 break;
             case state::yellow:
                 for (int i = 0; i < 4; i++) {
                     for (int pw = 8; pw < 12; pw++) {
-                        if (pawns.at(pw)->position == positions.yellowStartPositions[i]) {
+                        if (pawns.at(pw)->position == positions->yellowStartPositions[i]) {
+                            foundPawn = true;
                             break;
                         }
                     }
-                    p->returnToBase(positions.yellowStartPositions[i]);
-                    return;
+                    if (foundPawn) {
+                        foundPawn = false;
+                        continue;
+                    }
+                    else {
+                        p->atBase = true;
+                        p->returnToBase(positions->yellowStartPositions[i]);
+                        return;
+                    }
                 }
                 break;
             case state::green:
                 for (int i = 0; i < 4; i++) {
                     for (int pw = 12; pw < 16; pw++) {
-                        if (pawns.at(pw)->position == positions.greenStartPositions[i]) {
+                        if (pawns.at(pw)->position == positions->greenStartPositions[i]) {
+                            foundPawn = true;
                             break;
                         }
                     }
-                    p->returnToBase(positions.greenStartPositions[i]);
-                    return;
+                    if (foundPawn) {
+                        foundPawn = false;
+                        continue;
+                    }
+                    else {
+                        p->atBase = true;
+                        p->returnToBase(positions->greenStartPositions[i]);
+                        return;
+                    }
                 }
                 break;
             }
+        }
+    }
+}
+
+void Graphics::finishPawn(state color, int finishPos, int pawnPos)
+{
+    for (auto& p : pawns) {
+        if (p->position == positions->playPositions[pawnPos]) {
+            switch (color) {
+            case state::blue:
+                p->moveTo(positions->blueEndPositions[finishPos]);
+                break;
+            case state::red:
+                p->moveTo(positions->redEndPositions[finishPos]);
+                break;
+            case state::yellow:
+                p->moveTo(positions->yellowEndPositions[finishPos]);
+                break;
+            case state::green:
+                p->moveTo(positions->greenEndPositions[finishPos]);
+                break;
+            }
+            break;
         }
     }
 }

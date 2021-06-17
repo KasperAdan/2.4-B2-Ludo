@@ -66,10 +66,10 @@ void BoardLogic::spawnPawn(PlayerLogic *player, Graphics gph)
 		{
 			PlayerLogic enemy = getPlayerByColor(board[player->boardOffset]);
 			enemy.addHomePawn();
-			gph.moveFromBase(player->playerColor, player->boardOffset, true);
+			gph.moveFromBase(player->playerColor, player->boardOffset, true, enemy.playerColor);
 		}
 		else
-			gph.moveFromBase(player->playerColor, player->boardOffset, false);
+			gph.moveFromBase(player->playerColor, player->boardOffset, false, state::empty);
 		
 		board[player->boardOffset] = player->playerColor;
 	}
@@ -146,6 +146,7 @@ void BoardLogic::movePawn(int location, int amount, Graphics gph)
 		}
 		player->finish[finishLocation] = player->playerColor;
 		board[location] = state::empty;
+		gph.finishPawn(player->playerColor, finishLocation, location);
 		return;
 	}
 
