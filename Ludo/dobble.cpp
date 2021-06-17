@@ -1,5 +1,7 @@
 #include <vector>
 #include "dobble.h"
+#include <stdio.h>
+#include <vector>
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
@@ -12,15 +14,23 @@ int loop_equal = 0;
 int previous_equal = 0;
 int full_zero_check = 0;
 int TOTAL_LOOPS = 20;
-int lastDiceCounts[6] = { 0, 0, 0, 0, 0, 0 };
-int diceCounts[6] = { 0, 0, 0, 0, 0, 0 };
+vector<int> diceCountsV;
+vector<int> lastDiceCountsV;
 
 Dobble::Dobble(int givenWebcamNr)
 {
     webcamNr = givenWebcamNr;
 }
 
+void Dobble::resetValues() {
+    previous_equal = 0;
+    full_zero_check = 0;
+    diceCountsV.clear();
+}
+
 int Dobble::findDice() {
+
+    loop_equal = 0;
 
     VideoCapture webcam;
     webcam.open(webcamNr);
@@ -46,7 +56,7 @@ int Dobble::findDice() {
             RotatedRect rect = minAreaRect(diceContours[i]);
 
             //Values for webcam, can differ from webcam
-            if ((rect.size.area() > 3500) && (rect.size.area() < 5000)) {
+            if ((rect.size.area() > 500) && (rect.size.area() < 5000)) {
 
                 // Check if it's a duplicate rectangle
                 bool process = true;
@@ -81,7 +91,8 @@ int Dobble::findDice() {
         putText(image, text, Point(20, 30), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
 
         // Counting dots of each die
-        fill_n(diceCounts, 6, 0);
+        resetValues();
+
         int totalDiceDots = 0;
         
         for (int i = 0; i < diceRects.size(); i++) {
@@ -130,75 +141,49 @@ int Dobble::findDice() {
 
             // Save dots count
             if (dotsRects.size() >= 1 && dotsRects.size() <= 6) {
-                diceCounts[dotsRects.size() - 1]++;
-
+                diceCountsV.push_back(dotsRects.size());
             }
         }
 
-        previous_equal = 0;
-        full_zero_check = 0;
-
-        //Checks if dice are equal and we need to break the loop
-        //Array equal check
-        for (int i = 0; i < 6; i++) {
-
-            //Look if the two arrays are equal
-            if (lastDiceCounts[i] == diceCounts[i]) {
-                previous_equal++;
-            }
-            else previous_equal = 0;
-
-            //If equal arrays
-            if (previous_equal == 6) {
-                loop_equal++;
-            }
-
-            //Checks if its is not an empty array
-            if (diceCounts[i] == 0) {
-                full_zero_check++;
-            }
-            else full_zero_check = 0;
-
-            //If empty array, equal assertion fails
-            if (full_zero_check == 6) {
-                loop_equal = 0;
-            }
-        }
+        if (diceCountsV == lastDiceCountsV && diceCountsV.size() != 0) loop_equal++;
+        else loop_equal = 0;
 
         //If the total loops is reached, break the while loop
         if (loop_equal >= TOTAL_LOOPS) {
             break;
         }
 
-        //If the arrays are not equal, the loop was not equal with the previous
-        if (previous_equal != 6) {
-            loop_equal = 0;
-        }
+        //We need to sort the Vector so we can print it in order on sreen
+        sort(diceCountsV.begin(), diceCountsV.end());
+        int vectorIndex = 0;
 
         //Display dot count
         for (int i = 0; i < 6; i++) {
 
             int count = 0;
-            count += diceCounts[i];
+
+            //If the value in the Vector equals I, we need to print the value
+            //This ignores the values we dont have
+            if (vectorIndex < diceCountsV.size() && diceCountsV.at(vectorIndex) - 1 == i) {
+                count++;
+                vectorIndex++;
+            }
+
             sprintf_s(text, "%d: %d", (i + 1), count);
             putText(image, text, Point(20, 55 + 25 * i), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
-            lastDiceCounts[i] = diceCounts[i];
+            
         }
 
-        imshow("Canny", cannyImage);
+        lastDiceCountsV = diceCountsV;
         imshow("Final Image", image);
 
         waitKey(1);
     }
 
+    destroyWindow("Final Image");
     webcam.release();
     
-    for (int i = 0; i < 6; i++) {
-        if (diceCounts[i] == 1) {
-            return i + 1;
-        }
-    }
-    return 0;
+    return diceCountsV.at(0);
 }
 
 Dobble::~Dobble()

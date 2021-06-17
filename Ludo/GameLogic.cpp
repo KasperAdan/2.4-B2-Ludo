@@ -14,7 +14,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 {
 	board = BoardLogic(amountOfPlayers);
 	graphics = Graphics();
-	Dobble d = Dobble(1);
+	Dobble d = Dobble(0);
 
 	playerTurn = 0;
 	running = true;

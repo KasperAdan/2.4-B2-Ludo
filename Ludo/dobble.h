@@ -9,4 +9,5 @@ public:
 	int findDice();
 
 private:	
+	void resetValues();
 };
