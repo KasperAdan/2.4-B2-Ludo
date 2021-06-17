@@ -9,7 +9,7 @@ using namespace cv;
 class HandDetection
 {
 public:
-	HandDetection(int webcamNr);
+	HandDetection(int handDetectionWebcamNr);
 	~HandDetection();
 
 	int findFingers();

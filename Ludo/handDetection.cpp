@@ -9,12 +9,12 @@ int hmin = 0,	smin = 0,	vmin = 120;
 int hmax = 35,	smax = 150,	vmax = 250;
 
 int fingerCount;
-int webcamNr;
+int handDetectionWebcam;
 VideoCapture webcam;
 
-HandDetection::HandDetection(int givenWebcamNr)
+HandDetection::HandDetection(int handDetectionWebcamNr)
 {
-	webcamNr = givenWebcamNr;
+	handDetectionWebcam = handDetectionWebcamNr;
 
 	namedWindow("Trackbars", (614, 200));
 	createTrackbar("Hue min", "Trackbars", &hmin, 179);
@@ -28,7 +28,7 @@ HandDetection::HandDetection(int givenWebcamNr)
 
 int HandDetection::findFingers() {
 
-	webcam.open(webcamNr);
+	webcam.open(handDetectionWebcam);
 
 	int fingerCountReturn = 0;
 	int previousFingerCount = 0;
