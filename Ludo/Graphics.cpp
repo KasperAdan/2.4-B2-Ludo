@@ -88,7 +88,7 @@ void Graphics::init()
         });
 
     // Create camera
-    camera = new DebugCamera(window);
+    camera = new Camera();
     camera->moveTo(glm::vec3(-7.28f, -8.0f, -12.0f), glm::vec3(45, 0, 0));
 
     // Create board
