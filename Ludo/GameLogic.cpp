@@ -69,7 +69,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 			j++;
 		}
 
-		if (possiblePawns.size() == 0)
+		if (possiblePawns.size() == 0 && dobbleValue != 6)
 		{
 			nextTurn();
 			continue;
@@ -99,7 +99,8 @@ GameLogic::GameLogic(int amountOfPlayers)
 		}
 
 		//next player
-		nextTurn();
+		if(dobbleValue != 6)
+			nextTurn();
 	}
 	
 }

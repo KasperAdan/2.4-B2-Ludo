@@ -91,6 +91,11 @@ bool BoardLogic::movePawnCheck(int location, int amount)
 {
 	PlayerLogic player = getPlayerByColor(board[location]);
 	
+	if (board[(location + amount) % 40] == player.playerColor)//check for own pawn in new position
+	{
+		return false;
+	}
+
 	if (location + amount < player.boardOffset) 
 	{
 		int offsetLocation = location + amount + (40 - player.boardOffset);
