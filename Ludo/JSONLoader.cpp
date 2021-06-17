@@ -17,33 +17,33 @@ JSONLoader::~JSONLoader() {
 bool JSONLoader::loadPositions(boardPositions* positions)
 {
 	ifstream file("Resource/Ludo_Positions.json");
-	string jsonString;
-	string newJsonString;
-	string errors;
 
 	// Loop through all the lines in Ludo_Positions and store each line into newJsonString
-	while (getline(file, jsonString))
-	{
-		newJsonString = newJsonString + jsonString;
-	}
+	//while (getline(file, jsonString))
+	//{
+	//	newJsonString = newJsonString + jsonString;
+	//}
 
 	Json::CharReaderBuilder builder;
-	Json::CharReader* reader = builder.newCharReader();
 	Json::Value root;
+	bool parsingSuccesful = Json::parseFromStream(builder, file, &root, nullptr);
+
+	//Json::CharReader* reader = builder.newCharReader();
 
 	// Parse newJsonString into root
-	bool parsingSuccesful = reader->parse(newJsonString.c_str(), newJsonString.c_str() + newJsonString.size(), &root, &errors);
-	delete reader;
+	//bool parsingSuccesful = reader->parse(newJsonString.c_str(), newJsonString.c_str() + newJsonString.size(), &root, &errors);
+	//delete reader;
 
 	if (!parsingSuccesful) {
-		cout << jsonString << endl;
-		cout << errors << endl;
+	//	cout << jsonString << endl;
+	//	cout << errors << endl;
+		cout << "Error reading json!!!!" << endl;
 	}
 
 	fillArrays(positions, root);
 	
 
-	return parsingSuccesful;
+	return true;
 }
 
 void JSONLoader::fillArrays(boardPositions* positions, Json::Value root) {

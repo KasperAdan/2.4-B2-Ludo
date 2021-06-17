@@ -32,10 +32,10 @@ GameLogic game;
 
 int main(void)
 {
-    //JSONLoader* jsonLoader = new JSONLoader();
-    //struct JSONLoader::boardPositions p;
-    //struct JSONLoader::boardPositions* positions = &p;
-    //jsonLoader->loadPositions(positions);
+    JSONLoader* jsonLoader = new JSONLoader();
+    struct JSONLoader::boardPositions p;
+    struct JSONLoader::boardPositions* positions = &p;
+    jsonLoader->loadPositions(positions);
 
     game = GameLogic(4);
     //dobble d = dobble();
