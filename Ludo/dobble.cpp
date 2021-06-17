@@ -93,7 +93,7 @@ int Dobble::findDice() {
             RotatedRect rect = diceRects[i];
             rotation = getRotationMatrix2D(rect.center, rect.angle, 1.0);
             warpAffine(cannyImage, rotated, rotation, cannyImage.size(), INTER_CUBIC);
-            getRectSubPix(rotated, Size(rect.size.width - 10, rect.size.height - 10), rect.center, cropped);
+            getRectSubPix(rotated, Size(rect.size.width, rect.size.height), rect.center, cropped);
 
             // Find contours
             vector<vector<Point>> dieContours;

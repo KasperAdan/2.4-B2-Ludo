@@ -14,6 +14,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 {
 	board = BoardLogic(amountOfPlayers);
 	graphics = Graphics();
+	Dobble d = Dobble(1);
 
 	playerTurn = 0;
 	running = true;
@@ -22,21 +23,17 @@ GameLogic::GameLogic(int amountOfPlayers)
 
 	while (running)
 	{
-		board.printBoard();
-
 		//dobble (dobble detection)
-		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your dobble value: ";
-		int dobbleValue = -1;
+		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", its your turn to doble: \n\n";
 
-		while (dobbleValue > 6 || dobbleValue <= 0)
-		{
-			std::cin >> dobbleValue;
-		}
-
+		int diceFound = -1;
+		diceFound = d.findDice();
+		std::cout << diceFound <<  "\n\n";
+		
 		//get choices
 		std::vector<int> playerPawns = board.getPawnLocations(board.players[playerTurn]);
 
-		if (playerPawns.size() == 0 && dobbleValue != 6)
+		if (playerPawns.size() == 0 && diceFound != 6)
 		{
 			nextTurn();
 			continue;
@@ -44,7 +41,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 
 		std::vector<int> possiblePawns;
 
-		if (dobbleValue == 6)
+		if (diceFound == 6)
 		{
 			if (board.spawnPawnCheck(&board.players[playerTurn]))
 			{
@@ -54,7 +51,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 
 		for (int i : playerPawns)
 		{
-			if (board.movePawnCheck(i, dobbleValue))
+			if (board.movePawnCheck(i, diceFound))
 			{
 				possiblePawns.push_back(i);
 			}
@@ -69,7 +66,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 			j++;
 		}
 
-		if (possiblePawns.size() == 0 && dobbleValue != 6)
+		if (possiblePawns.size() == 0 && diceFound != 6)
 		{
 			nextTurn();
 			continue;
@@ -92,14 +89,14 @@ GameLogic::GameLogic(int amountOfPlayers)
 		else
 		{
 			//for (int i = 0; i < dobbleValue; i++) {
-				board.movePawn(possiblePawns[pawnValue], dobbleValue, graphics);
+				board.movePawn(possiblePawns[pawnValue], diceFound, graphics);
 				//graphics.movePawn(0, glm::vec3(-4, 0, 4));
 				//while (graphics.isMoving(possiblePawns[pawnValue])) {}
 			//}
 		}
 
 		//next player
-		if(dobbleValue != 6)
+		if(diceFound != 6)
 			nextTurn();
 	}
 	
