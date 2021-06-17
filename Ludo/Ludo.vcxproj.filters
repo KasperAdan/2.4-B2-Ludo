@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Util">
       <UniqueIdentifier>{6d50d899-7c47-42ec-9c45-686ae1cf6c22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Vision">
+      <UniqueIdentifier>{b6c7de50-1f42-4f27-8666-cb21e045f331}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tigl.cpp">
@@ -69,14 +72,17 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="dobble.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Dobble.cpp">
+      <Filter>Source Files\Vision</Filter>
     </ClCompile>
     <ClCompile Include="JSONLoader.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandDetection.cpp">
+      <Filter>Source Files\Vision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +132,9 @@
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="handDetection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

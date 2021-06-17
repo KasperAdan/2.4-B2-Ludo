@@ -79,6 +79,8 @@
     <LibraryPath>C:\Users\Bartinos\Documents\Repos\2.4-B2-Ludo\Ludo\lib\jsoncpp_x64-windows\lib;$(LibraryPath)</LibraryPath>
     <IncludePath>D:\opencv\build\include;$(SolutionDir)lib\jsoncpp_x64-windows\include;$(SolutionDir)libopencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\opencv\build\x64\vc15\lib;$(SolutionDir)lib\jsoncpp_x64-windows\lib;$(SolutionDir)lib\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\openCV\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\openCV\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -165,7 +167,7 @@
     <ClCompile Include="BoardLogic.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DebugCamera.cpp" />
-    <ClCompile Include="dobble.cpp" />
+    <ClCompile Include="Dobble.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -174,6 +176,7 @@
     <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="PlayerLogic.cpp" />
+    <ClCompile Include="HandDetection.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
@@ -188,6 +191,7 @@
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="JSONLoader.h" />
+    <ClInclude Include="handDetection.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="PlayerLogic.h" />
     <ClInclude Include="state.h" />
