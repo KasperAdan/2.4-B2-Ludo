@@ -6,11 +6,11 @@
 using namespace std;
 using namespace cv;
 
-class handDetection
+class HandDetection
 {
 public:
-	handDetection();
-	~handDetection();
+	HandDetection();
+	~HandDetection();
 
 	std::string getCommand(VideoCapture vCapture);
 

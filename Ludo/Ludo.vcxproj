@@ -162,13 +162,13 @@
     <ClCompile Include="BoardLogic.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DebugCamera.cpp" />
-    <ClCompile Include="dobble.cpp" />
+    <ClCompile Include="Dobble.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="PlayerLogic.cpp" />
-    <ClCompile Include="handDetection.cpp" />
+    <ClCompile Include="HandDetection.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>

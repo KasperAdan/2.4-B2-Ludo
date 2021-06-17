@@ -63,10 +63,10 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="dobble.cpp">
+    <ClCompile Include="Dobble.cpp">
       <Filter>Source Files\Vision</Filter>
     </ClCompile>
-    <ClCompile Include="handDetection.cpp">
+    <ClCompile Include="HandDetection.cpp">
       <Filter>Source Files\Vision</Filter>
     </ClCompile>
   </ItemGroup>

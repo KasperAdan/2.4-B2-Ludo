@@ -1,11 +1,12 @@
 #pragma once
 
-class dobble
+
+class Dobble
 {
 public:
-	dobble();
-	~dobble();
+	Dobble(int givenWebcamNr);
+	~Dobble();
+	int* findDice();
 
-private:
-
+private:	
 };

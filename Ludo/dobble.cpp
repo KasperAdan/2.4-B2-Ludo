@@ -7,18 +7,24 @@
 using namespace cv;
 using namespace std;
 
-dobble::dobble()
+int webcamNr = 0;
+int loop_equal = 0;
+int previous_equal = 0;
+int full_zero_check = 0;
+int TOTAL_LOOPS = 20;
+int lastDiceCounts[6] = { 0, 0, 0, 0, 0, 0 };
+int diceCounts[6] = { 0, 0, 0, 0, 0, 0 };
+
+Dobble::Dobble(int givenWebcamNr)
 {
+    webcamNr = givenWebcamNr;
+}
+
+int* Dobble::findDice() {
 
     VideoCapture webcam;
-    webcam.open(0);
+    webcam.open(webcamNr);
 
-    int loop_equal = 0;
-    int previous_equal = 0;
-    int full_zero_check = 0;
-    int TOTAL_LOOPS = 20;
-    int lastDiceCounts[6] = { 0, 0, 0, 0, 0, 0 };
-    int diceCounts[6] = { 0, 0, 0, 0, 0, 0 };
     while (1) {
         Mat image, grayImage, cannyImage;
         webcam.read(image);
@@ -181,9 +187,11 @@ dobble::dobble()
 
         waitKey(1);
     }
-    //return diceCounts;
+
+    webcam.release();
+    return diceCounts;
 }
 
-dobble::~dobble()
+Dobble::~Dobble()
 {
 }

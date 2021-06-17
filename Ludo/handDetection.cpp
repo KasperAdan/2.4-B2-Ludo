@@ -1,7 +1,6 @@
 #include "handDetection.h"
 
 #include <iostream>
-#define PI 3.14159265
 
 using namespace std;
 using namespace cv;
@@ -10,7 +9,7 @@ int hmin = 0,	smin = 0,	vmin = 120;
 int hmax = 35,	smax = 150,	vmax = 250;
 
 
-handDetection::handDetection()
+HandDetection::HandDetection()
 {
 	VideoCapture webcam;
 	webcam.open(0);
@@ -29,11 +28,11 @@ handDetection::handDetection()
 	}
 }
 
-handDetection::~handDetection()
+HandDetection::~HandDetection()
 {
 }
 
-string handDetection::getCommand(VideoCapture webcam) {
+string HandDetection::getCommand(VideoCapture webcam) {
 	Mat cameraFrame, blurFrame, closedFrame, hsvFrame, thresholdFrame;
 	string command = "nothing-new";
 
@@ -62,7 +61,7 @@ string handDetection::getCommand(VideoCapture webcam) {
 }
 
 //Reduces noice in image
-void handDetection::noiseReduction(Mat& frame) {
+void HandDetection::noiseReduction(Mat& frame) {
 	erode(frame, frame, Mat());
 	erode(frame, frame, Mat());
 				  
@@ -74,7 +73,7 @@ void handDetection::noiseReduction(Mat& frame) {
 }
 
 //the important function to track the hand, the algorithm is described in the report
-string handDetection::trackHand(Mat src, Mat& dest) {
+string HandDetection::trackHand(Mat src, Mat& dest) {
 
 	Rect boundRect;
 	int largestObj;
@@ -129,7 +128,6 @@ string handDetection::trackHand(Mat src, Mat& dest) {
 		if (handFound) {
 
 			int countHullPoint = convexHullPoint.size();
-			int maxdist = 0;
 			int pos = 0;
 			for (int i = 1; i < countHullPoint; i++) {
 
@@ -140,10 +138,10 @@ string handDetection::trackHand(Mat src, Mat& dest) {
 					int dist = (centerP.x - convexHullPoint[i].x) ^ 2 + (centerP.y - convexHullPoint[i].y) ^ 2;
 					if (abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) < 12) {
 
-						if (dist > maxdist) {
+						/*if (dist > maxdist) {
 							maxdist = dist;
 							pos = i;
-						}
+						}*/
 					}
 					else if (i == 0 || abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) >= 12) {
 
@@ -169,6 +167,6 @@ string handDetection::trackHand(Mat src, Mat& dest) {
 }
 
 ////send out the result signal
-void handDetection::sendResult(String msg) {
+void HandDetection::sendResult(String msg) {
 	cout << "Command: " << msg << endl;
 }
