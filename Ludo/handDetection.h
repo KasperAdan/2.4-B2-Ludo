@@ -9,10 +9,10 @@ using namespace cv;
 class HandDetection
 {
 public:
-	HandDetection();
+	HandDetection(int webcamNr);
 	~HandDetection();
 
-	int getCommand(VideoCapture vCapture);
+	int findFingers();
 
 private:
 	void noiseReduction(Mat& frame);

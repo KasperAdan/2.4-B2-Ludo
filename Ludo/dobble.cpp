@@ -9,28 +9,19 @@
 using namespace cv;
 using namespace std;
 
-int webcamNr = 0;
-int loop_equal = 0;
-int previous_equal = 0;
-int full_zero_check = 0;
-int TOTAL_LOOPS = 20;
+int webcamNr;
+int loop_equal;
+int const TOTAL_LOOPS = 20;
 vector<int> diceCountsV;
 vector<int> lastDiceCountsV;
 
 Dobble::Dobble(int givenWebcamNr)
 {
     webcamNr = givenWebcamNr;
-}
-
-void Dobble::resetValues() {
-    previous_equal = 0;
-    full_zero_check = 0;
-    diceCountsV.clear();
+    loop_equal = 0;
 }
 
 int Dobble::findDice() {
-
-    loop_equal = 0;
 
     VideoCapture webcam;
     webcam.open(webcamNr);
@@ -51,6 +42,7 @@ int Dobble::findDice() {
         findContours(cannyImage, diceContours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
 
         vector<RotatedRect> diceRects;
+
         for (int i = 0; i < diceContours.size(); i++) {
             // For each contour, search the minimum area rectangle
             RotatedRect rect = minAreaRect(diceContours[i]);
@@ -91,8 +83,7 @@ int Dobble::findDice() {
         putText(image, text, Point(20, 30), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
 
         // Counting dots of each die
-        resetValues();
-
+        diceCountsV.clear();
         int totalDiceDots = 0;
         
         for (int i = 0; i < diceRects.size(); i++) {
@@ -150,6 +141,7 @@ int Dobble::findDice() {
 
         //If the total loops is reached, break the while loop
         if (loop_equal >= TOTAL_LOOPS) {
+            loop_equal = 0;
             break;
         }
 
@@ -174,7 +166,9 @@ int Dobble::findDice() {
             
         }
 
+        //Remember the last dice roll
         lastDiceCountsV = diceCountsV;
+
         imshow("Final Image", image);
 
         waitKey(1);

@@ -9,12 +9,12 @@ int hmin = 0,	smin = 0,	vmin = 120;
 int hmax = 35,	smax = 150,	vmax = 250;
 
 int fingerCount;
+int webcamNr;
+VideoCapture webcam;
 
-
-HandDetection::HandDetection()
+HandDetection::HandDetection(int givenWebcamNr)
 {
-	VideoCapture webcam;
-	webcam.open(0);
+	webcamNr = givenWebcamNr;
 
 	namedWindow("Trackbars", (614, 200));
 	createTrackbar("Hue min", "Trackbars", &hmin, 179);
@@ -24,37 +24,57 @@ HandDetection::HandDetection()
 	createTrackbar("Val min", "Trackbars", &vmin, 255);
 	createTrackbar("Val max", "Trackbars", &vmax, 255);
 	
-	while (1) {
-		getCommand(webcam);
-		waitKey(1);
-	}
 }
 
-int HandDetection::getCommand(VideoCapture webcam) {
-	Mat cameraFrame, hsvFrame, thresholdFrame;
+int HandDetection::findFingers() {
 
-	webcam.read(cameraFrame);
-	//switch the RGB to HSV space
-	cvtColor(cameraFrame, hsvFrame, COLOR_BGR2HSV);
+	webcam.open(webcamNr);
 
-	//Adjust colors to find hand
-	inRange(hsvFrame, Scalar(hmin, smin, vmin), Scalar(hmax, smax, vmax), thresholdFrame);
+	int fingerCountReturn = 0;
+	int previousFingerCount = 0;
+	int fingerLoopsThreshold = 20;
+	int currentFingerLoops = 0;
 
-	//Erodes and Dilates for noise reduction
-	imshow("treshold", thresholdFrame);
-	noiseReduction(thresholdFrame);
-	imshow("threshold noise reduced", thresholdFrame);
+	while (1) {
+		Mat cameraFrame, hsvFrame, thresholdFrame;
 
-	//track the hand, put the bounding box around the hand
-	//calculate the center point of the hand
-	int fingerCountReturn = trackHand(thresholdFrame, cameraFrame);
+		webcam.read(cameraFrame);
+		//switch the RGB to HSV space
+		cvtColor(cameraFrame, hsvFrame, COLOR_BGR2HSV);
 
-	imshow("Hand_Gesture_Detection", cameraFrame);
+		//Adjust colors to find hand
+		inRange(hsvFrame, Scalar(hmin, smin, vmin), Scalar(hmax, smax, vmax), thresholdFrame);
 
-	//release the memory
-	cameraFrame.release();
+		//Erodes and Dilates for noise reduction
+		imshow("treshold", thresholdFrame);
+		noiseReduction(thresholdFrame);
+		imshow("threshold noise reduced", thresholdFrame);
+
+		//track the hand, put the bounding box around the hand
+		//calculate the center point of the hand
+		fingerCountReturn = trackHand(thresholdFrame, cameraFrame);
+
+		if (fingerCountReturn == previousFingerCount) {
+			currentFingerLoops++;
+		}
+		else currentFingerLoops = 0;
+
+		previousFingerCount = fingerCountReturn;
+
+		imshow("webcam", cameraFrame);
+
+		//release the memory
+		cameraFrame.release();
+
+		if (currentFingerLoops == fingerLoopsThreshold) break;
+
+	}
+
+	//Destroy all windows, close webcam
+	destroyWindow("webcam");
 	destroyWindow("treshold");
 	destroyWindow("threshold noise reduced");
+	webcam.release();
 
 	return fingerCountReturn;
 }
@@ -68,7 +88,6 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 	vector<vector<Point> > contoursSet(contours.size());
 	vector<Vec4i> hierarchy;
 	vector<Point> convexHullPoint;
-	vector<Point> fingerPoint;
 	Point centerP;
 	int numObjects = 0;
 	double area = 0;
@@ -113,25 +132,16 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 
 		if (handFound) {
 
-			int countHullPoint = convexHullPoint.size();
 			int pos = 0;
-			for (int i = 1; i < countHullPoint; i++) {
+			for (int i = 1; i < convexHullPoint.size(); i++) {
 
 				pos = i;
 				if (centerP.y >= convexHullPoint[i].y && centerP.y >= convexHullPoint[pos].y) {
 
 					pos = i;
-					int dist = (centerP.x - convexHullPoint[i].x) ^ 2 + (centerP.y - convexHullPoint[i].y) ^ 2;
-					if (abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) < 12) {
+					if (i == 0 || abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) >= 12) {
 
-						/*if (dist > maxdist) {
-							maxdist = dist;
-							pos = i;
-						}*/
-					}
-					else if (i == 0 || abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) >= 12) {
-
-						fingerPoint.push_back(convexHullPoint[pos]);
+						fingerCount++;
 						line(dest, centerP, convexHullPoint[pos], Scalar(0, 255, 0), 3, 8, 0);
 						circle(dest, convexHullPoint[pos], 8, Scalar(255, 0, 0), FILLED);
 						pos = i;
@@ -139,8 +149,7 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 				}
 			}
 
-			//get the size the fingers
-			fingerCount = fingerPoint.size();
+			//Limit to 5 fingers
 			if (fingerCount > 5) {
 				fingerCount = 5;
 			}
