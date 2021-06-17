@@ -8,6 +8,8 @@ using namespace cv;
 int hmin = 0,	smin = 0,	vmin = 120;
 int hmax = 35,	smax = 150,	vmax = 250;
 
+int fingerCount;
+
 
 HandDetection::HandDetection()
 {
@@ -28,13 +30,8 @@ HandDetection::HandDetection()
 	}
 }
 
-HandDetection::~HandDetection()
-{
-}
-
-string HandDetection::getCommand(VideoCapture webcam) {
-	Mat cameraFrame, blurFrame, closedFrame, hsvFrame, thresholdFrame;
-	string command = "nothing-new";
+int HandDetection::getCommand(VideoCapture webcam) {
+	Mat cameraFrame, hsvFrame, thresholdFrame;
 
 	webcam.read(cameraFrame);
 	//switch the RGB to HSV space
@@ -46,34 +43,24 @@ string HandDetection::getCommand(VideoCapture webcam) {
 	//Erodes and Dilates for noise reduction
 	imshow("treshold", thresholdFrame);
 	noiseReduction(thresholdFrame);
-	imshow("threshold dilated", thresholdFrame);
+	imshow("threshold noise reduced", thresholdFrame);
 
 	//track the hand, put the bounding box around the hand
 	//calculate the center point of the hand
-	command = trackHand(thresholdFrame, cameraFrame);
+	int fingerCountReturn = trackHand(thresholdFrame, cameraFrame);
 
 	imshow("Hand_Gesture_Detection", cameraFrame);
 
 	//release the memory
 	cameraFrame.release();
+	destroyWindow("treshold");
+	destroyWindow("threshold noise reduced");
 
-	return command;
-}
-
-//Reduces noice in image
-void HandDetection::noiseReduction(Mat& frame) {
-	erode(frame, frame, Mat());
-	erode(frame, frame, Mat());
-				  
-	dilate(frame, frame, Mat());
-	dilate(frame, frame, Mat());
-	dilate(frame, frame, Mat());
-	dilate(frame, frame, Mat());
-
+	return fingerCountReturn;
 }
 
 //the important function to track the hand, the algorithm is described in the report
-string HandDetection::trackHand(Mat src, Mat& dest) {
+int HandDetection::trackHand(Mat src, Mat& dest) {
 
 	Rect boundRect;
 	int largestObj;
@@ -88,8 +75,6 @@ string HandDetection::trackHand(Mat src, Mat& dest) {
 	double maxArea = 0;
 	bool handFound = false;
 
-	//initialize default command
-	String resultMsg = "nothing-new";
 
 	//find all the contours in the threshold Frame
 	findContours(src, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
@@ -102,6 +87,7 @@ string HandDetection::trackHand(Mat src, Mat& dest) {
 			largestObj = i;
 		}
 	}
+
 	if (maxArea > 4000) {
 
 		handFound = true;
@@ -154,19 +140,28 @@ string HandDetection::trackHand(Mat src, Mat& dest) {
 			}
 
 			//get the size the fingers
-			int countFinger = fingerPoint.size();
-			if (countFinger > 5) {
-				countFinger = 5;
+			fingerCount = fingerPoint.size();
+			if (fingerCount > 5) {
+				fingerCount = 5;
 			}
 			
-			sendResult(resultMsg);
-			putText(dest, to_string(countFinger), printPoint, 1, 5, Scalar(0, 255, 0), 1, 5, false);
+			putText(dest, to_string(fingerCount), printPoint, 1, 5, Scalar(0, 255, 0), 1, 5, false);
 		}
 	}
-	return resultMsg;
+	return fingerCount;
 }
 
-////send out the result signal
-void HandDetection::sendResult(String msg) {
-	cout << "Command: " << msg << endl;
+//Reduces noice in image
+void HandDetection::noiseReduction(Mat& frame) {
+
+	for (int i = 0; i < 3; i++) { erode(frame, frame, Mat()); }
+	
+	for (int i = 0; i < 4; i++) { dilate(frame, frame, Mat()); }
+
 }
+
+
+HandDetection::~HandDetection()
+{
+}
+

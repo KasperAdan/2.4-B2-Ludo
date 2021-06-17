@@ -12,14 +12,10 @@ public:
 	HandDetection();
 	~HandDetection();
 
-	std::string getCommand(VideoCapture vCapture);
+	int getCommand(VideoCapture vCapture);
 
 private:
 	void noiseReduction(Mat& frame);
-	std::string integerToString(int num);
-	int angleToCenter(const Point& v1, const Point& v2);
-	//	string doAction(int totalAngleOfFinger, int fingerSize);
-	void sendResult(string msg);
-	string trackHand(Mat src, Mat& dest);
+	int trackHand(Mat src, Mat& dest);
 
 };
