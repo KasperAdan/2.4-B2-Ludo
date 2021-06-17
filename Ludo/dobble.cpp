@@ -20,7 +20,7 @@ Dobble::Dobble(int givenWebcamNr)
     webcamNr = givenWebcamNr;
 }
 
-int* Dobble::findDice() {
+int Dobble::findDice() {
 
     VideoCapture webcam;
     webcam.open(webcamNr);
@@ -189,7 +189,13 @@ int* Dobble::findDice() {
     }
 
     webcam.release();
-    return diceCounts;
+    
+    for (int i = 0; i < 6; i++) {
+        if (diceCounts[i] == 1) {
+            return i + 1;
+        }
+    }
+    return 0;
 }
 
 Dobble::~Dobble()

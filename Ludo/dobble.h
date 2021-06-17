@@ -6,7 +6,7 @@ class Dobble
 public:
 	Dobble(int givenWebcamNr);
 	~Dobble();
-	int* findDice();
+	int findDice();
 
 private:	
 };

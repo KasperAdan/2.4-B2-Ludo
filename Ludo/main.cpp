@@ -27,7 +27,7 @@ void draw();
 int main(void)
 {
     Dobble d = Dobble(0);
-    int* diceCounts = d.findDice();
+    int diceFound = d.findDice();
 
     d.findDice();
     //handDetection h = handDetection();
