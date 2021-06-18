@@ -1,0 +1,602 @@
+The system is: Windows - 10.0.19042 - AMD64
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++ Optimizing Compiler Version 19.27.29111 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+CMakeCXXCompilerId.cpp
+Microsoft (R) Incremental Linker Version 14.27.29111.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCXXCompilerId.exe 
+CMakeCXXCompilerId.obj 
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+
+The CXX compiler identification is MSVC, found in "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe"
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++ Optimizing Compiler Version 19.27.29111 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+CMakeCCompilerId.c
+Microsoft (R) Incremental Linker Version 14.27.29111.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCCompilerId.exe 
+CMakeCCompilerId.obj 
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+
+The C compiler identification is MSVC, found in "D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdC/CMakeCCompilerId.exe"
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_e9129 && [1/2] Building CXX object CMakeFiles\cmTC_e9129.dir\testCXXCompiler.cxx.obj
+[2/2] Linking CXX executable cmTC_e9129.exe
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_e83ea && [1/2] Building CXX object CMakeFiles\cmTC_e83ea.dir\CMakeCXXCompilerABI.cpp.obj
+[2/2] Linking CXX executable cmTC_e83ea.exe
+
+
+
+Determining if the C compiler works passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_bb2dc && [1/2] Building C object CMakeFiles\cmTC_bb2dc.dir\testCCompiler.c.obj
+[2/2] Linking C executable cmTC_bb2dc.exe
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_d08ed && [1/2] Building C object CMakeFiles\cmTC_d08ed.dir\CMakeCCompilerABI.c.obj
+[2/2] Linking C executable cmTC_d08ed.exe
+
+
+
+Determining if the include file malloc.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_273ed && [1/2] Building C object CMakeFiles\cmTC_273ed.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_273ed.exe
+
+
+
+Determining if the _aligned_malloc exist passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_8cf98 && [1/2] Building C object CMakeFiles\cmTC_8cf98.dir\CheckSymbolExists.c.obj
+[2/2] Linking C executable cmTC_8cf98.exe
+
+
+File D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _aligned_malloc
+  return ((int*)(&_aligned_malloc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_0f5bc && [1/2] Building C object CMakeFiles\cmTC_0f5bc.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_0f5bc.exe
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_8398a && [1/2] Building C object CMakeFiles\cmTC_8398a.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_8398a.exe
+
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_3d1e1 && [1/2] Building C object CMakeFiles\cmTC_3d1e1.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_3d1e1.exe
+
+
+
+Determining size of unsigned short passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_1b7c9 && [1/2] Building C object CMakeFiles\cmTC_1b7c9.dir\CMAKE_SIZEOF_UNSIGNED_SHORT.c.obj
+[2/2] Linking C executable cmTC_1b7c9.exe
+
+
+
+Determining if the system is big endian passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_d85ce && [1/2] Building C object CMakeFiles\cmTC_d85ce.dir\TestEndianess.c.obj
+[2/2] Linking C executable cmTC_d85ce.exe
+
+
+TestEndianess.c:
+/* A 16 bit integer is required. */
+typedef unsigned short cmakeint16;
+
+/* On a little endian machine, these 16bit ints will give "THIS IS LITTLE ENDIAN."
+   On a big endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_little[] =  {0x4854, 0x5349, 0x4920, 0x2053, 0x494c, 0x5454, 0x454c, 0x4520, 0x444e, 0x4149, 0x2e4e, 0x0000};
+
+/* on a big endian machine, these 16bit ints will give "THIS IS BIG ENDIAN."
+   On a little endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_big[] =     {0x5448, 0x4953, 0x2049, 0x5320, 0x4249, 0x4720, 0x454e, 0x4449, 0x414e, 0x2e2e, 0x0000};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_little[argc];
+  require += info_big[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining size of size_t passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_80a5b && [1/2] Building C object CMakeFiles\cmTC_80a5b.dir\SIZEOF_SIZE_T.c.obj
+[2/2] Linking C executable cmTC_80a5b.exe
+
+
+
+Determining size of unsigned long passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_7751e && [1/2] Building C object CMakeFiles\cmTC_7751e.dir\SIZEOF_UNSIGNED_LONG.c.obj
+[2/2] Linking C executable cmTC_7751e.exe
+
+
+
+Determining if files intrin.h exist passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_aef6d && [1/2] Building C object CMakeFiles\cmTC_aef6d.dir\HAVE_INTRIN_H.c.obj
+[2/2] Linking C executable cmTC_aef6d.exe
+
+
+
+Determining if the include file assert.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_aa62d && [1/2] Building C object CMakeFiles\cmTC_aa62d.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_aa62d.exe
+
+
+
+Determining if the include file fcntl.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_9adeb && [1/2] Building C object CMakeFiles\cmTC_9adeb.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_9adeb.exe
+
+
+
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_3c0b9 && [1/2] Building C object CMakeFiles\cmTC_3c0b9.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_3c0b9.exe
+
+
+
+Determining if the include file io.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_62766 && [1/2] Building C object CMakeFiles\cmTC_62766.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_62766.exe
+
+
+
+Determining if the include file limits.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_66531 && [1/2] Building C object CMakeFiles\cmTC_66531.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_66531.exe
+
+
+
+Determining if the include file memory.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_01ea0 && [1/2] Building C object CMakeFiles\cmTC_01ea0.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_01ea0.exe
+
+
+
+Determining if the include file search.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_f4336 && [1/2] Building C object CMakeFiles\cmTC_f4336.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_f4336.exe
+
+
+
+Determining if the include file string.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_9e2e2 && [1/2] Building C object CMakeFiles\cmTC_9e2e2.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_9e2e2.exe
+
+
+
+Performing C SOURCE FILE Test C_HAS_inline succeeded with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_ba627 && [1/2] Building C object CMakeFiles\cmTC_ba627.dir\src.c.obj
+[2/2] Linking C executable cmTC_ba627.exe
+
+
+Source file was:
+
+        typedef int foo_t;
+        static inline foo_t static_foo() {return 0;}
+        foo_t foo(){return 0;}
+        int main(int argc, char *argv[]) {return 0;}
+Determining size of signed short passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_5b4e2 && [1/2] Building C object CMakeFiles\cmTC_5b4e2.dir\SIZEOF_SIGNED_SHORT.c.obj
+[2/2] Linking C executable cmTC_5b4e2.exe
+
+
+
+Determining size of unsigned short passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_f8f32 && [1/2] Building C object CMakeFiles\cmTC_f8f32.dir\SIZEOF_UNSIGNED_SHORT.c.obj
+[2/2] Linking C executable cmTC_f8f32.exe
+
+
+
+Determining size of signed int passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_e7956 && [1/2] Building C object CMakeFiles\cmTC_e7956.dir\SIZEOF_SIGNED_INT.c.obj
+[2/2] Linking C executable cmTC_e7956.exe
+
+
+
+Determining size of unsigned int passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_b4b53 && [1/2] Building C object CMakeFiles\cmTC_b4b53.dir\SIZEOF_UNSIGNED_INT.c.obj
+[2/2] Linking C executable cmTC_b4b53.exe
+
+
+
+Determining size of signed long passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_d58e2 && [1/2] Building C object CMakeFiles\cmTC_d58e2.dir\SIZEOF_SIGNED_LONG.c.obj
+[2/2] Linking C executable cmTC_d58e2.exe
+
+
+
+Determining size of signed long long passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_1acd7 && [1/2] Building C object CMakeFiles\cmTC_1acd7.dir\SIZEOF_SIGNED_LONG_LONG.c.obj
+[2/2] Linking C executable cmTC_1acd7.exe
+
+
+
+Determining size of unsigned long long passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_b7d92 && [1/2] Building C object CMakeFiles\cmTC_b7d92.dir\SIZEOF_UNSIGNED_LONG_LONG.c.obj
+[2/2] Linking C executable cmTC_b7d92.exe
+
+
+
+Determining size of unsigned char * passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_ec60e && [1/2] Building C object CMakeFiles\cmTC_ec60e.dir\SIZEOF_UNSIGNED_CHAR_P.c.obj
+[2/2] Linking C executable cmTC_ec60e.exe
+
+
+
+Determining size of ptrdiff_t passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_660b2 && [1/2] Building C object CMakeFiles\cmTC_660b2.dir\SIZEOF_PTRDIFF_T.c.obj
+[2/2] Linking C executable cmTC_660b2.exe
+
+
+
+Determining if the function setmode exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_c7c55 && [1/2] Building C object CMakeFiles\cmTC_c7c55.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_c7c55.exe
+
+
+
+Determining if the function strchr exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_4f022 && [1/2] Building C object CMakeFiles\cmTC_4f022.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_4f022.exe
+
+
+
+Determining if the function strrchr exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_57617 && [1/2] Building C object CMakeFiles\cmTC_57617.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_57617.exe
+
+
+
+Determining if the function strstr exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_c5239 && [1/2] Building C object CMakeFiles\cmTC_c5239.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_c5239.exe
+
+
+
+Determining if the function strtol exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_541d8 && [1/2] Building C object CMakeFiles\cmTC_541d8.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_541d8.exe
+
+
+
+Determining if the function strtol exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_cb7b6 && [1/2] Building C object CMakeFiles\cmTC_cb7b6.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_cb7b6.exe
+
+
+
+Determining if the function strtoull exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_47e23 && [1/2] Building C object CMakeFiles\cmTC_47e23.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_47e23.exe
+
+
+
+Determining if the function lfind exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_66654 && [1/2] Building C object CMakeFiles\cmTC_66654.dir\CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_66654.exe
+
+
+
+Performing C SOURCE FILE Test HAVE_SNPRINTF succeeded with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_68e5b && [1/2] Building C object CMakeFiles\cmTC_68e5b.dir\src.c.obj
+[2/2] Linking C executable cmTC_68e5b.exe
+
+
+Source file was:
+
+#include <stdio.h>
+int main(void) {
+  char buf[10];
+  snprintf(buf, 10, "Test %d", 1);
+  return 0;
+}
+Determining if the system is big endian passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_50212 && [1/2] Building C object CMakeFiles\cmTC_50212.dir\TestEndianess.c.obj
+[2/2] Linking C executable cmTC_50212.exe
+
+
+TestEndianess.c:
+/* A 16 bit integer is required. */
+typedef unsigned short cmakeint16;
+
+/* On a little endian machine, these 16bit ints will give "THIS IS LITTLE ENDIAN."
+   On a big endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_little[] =  {0x4854, 0x5349, 0x4920, 0x2053, 0x494c, 0x5454, 0x454c, 0x4520, 0x444e, 0x4149, 0x2e4e, 0x0000};
+
+/* on a big endian machine, these 16bit ints will give "THIS IS BIG ENDIAN."
+   On a little endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_big[] =     {0x5448, 0x4953, 0x2049, 0x5320, 0x4249, 0x4720, 0x454e, 0x4449, 0x414e, 0x2e2e, 0x0000};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_little[argc];
+  require += info_big[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the system is big endian passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_cced8 && [1/2] Building C object CMakeFiles\cmTC_cced8.dir\TestEndianess.c.obj
+[2/2] Linking C executable cmTC_cced8.exe
+
+
+TestEndianess.c:
+/* A 16 bit integer is required. */
+typedef unsigned short cmakeint16;
+
+/* On a little endian machine, these 16bit ints will give "THIS IS LITTLE ENDIAN."
+   On a big endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_little[] =  {0x4854, 0x5349, 0x4920, 0x2053, 0x494c, 0x5454, 0x454c, 0x4520, 0x444e, 0x4149, 0x2e4e, 0x0000};
+
+/* on a big endian machine, these 16bit ints will give "THIS IS BIG ENDIAN."
+   On a little endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_big[] =     {0x5448, 0x4953, 0x2049, 0x5320, 0x4249, 0x4720, 0x454e, 0x4449, 0x414e, 0x2e2e, 0x0000};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_little[argc];
+  require += info_big[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the include file stdlib.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_d4da8 && [1/2] Building C object CMakeFiles\cmTC_d4da8.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_d4da8.exe
+
+
+
+Determining if the include file stdio.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_ddf36 && [1/2] Building C object CMakeFiles\cmTC_ddf36.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_ddf36.exe
+
+
+
+Determining if the include file math.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_2a22c && [1/2] Building C object CMakeFiles\cmTC_2a22c.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_2a22c.exe
+
+
+
+Determining if the include file float.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_7054f && [1/2] Building C object CMakeFiles\cmTC_7054f.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_7054f.exe
+
+
+
+Determining if the include file time.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_bf6f5 && [1/2] Building C object CMakeFiles\cmTC_bf6f5.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_bf6f5.exe
+
+
+
+Determining if the include file stdarg.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_e045e && [1/2] Building C object CMakeFiles\cmTC_e045e.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_e045e.exe
+
+
+
+Determining if the include file ctype.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_f79b2 && [1/2] Building C object CMakeFiles\cmTC_f79b2.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_f79b2.exe
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_b0743 && [1/2] Building C object CMakeFiles\cmTC_b0743.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_b0743.exe
+
+
+
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_b93a8 && [1/2] Building C object CMakeFiles\cmTC_b93a8.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_b93a8.exe
+
+
+
+Determining if the include file sys/stat.h exists passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_e473c && [1/2] Building C object CMakeFiles\cmTC_e473c.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_e473c.exe
+
+
+
+Determining if files malloc.h exist passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_923ea && [1/2] Building C object CMakeFiles\cmTC_923ea.dir\OPJ_HAVE_MALLOC_H.c.obj
+[2/2] Linking C executable cmTC_923ea.exe
+
+
+
+Determining if the _aligned_malloc exist passed with the following output:
+Change Dir: D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_646d1 && [1/2] Building C object CMakeFiles\cmTC_646d1.dir\CheckSymbolExists.c.obj
+[2/2] Linking C executable cmTC_646d1.exe
+
+
+File D:/Documents/Programmeren/Year 2/Proftaak/2.4-B2-Ludo/Ludo/lib/opencv/sources/out/build/x64-Debug (default)/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <malloc.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _aligned_malloc
+  return ((int*)(&_aligned_malloc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
