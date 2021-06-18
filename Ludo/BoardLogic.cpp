@@ -153,7 +153,7 @@ void BoardLogic::movePawn(int location, int amount, Graphics gph)
 			reachesFinish = true;
 		}
 	}
-	if ((location + amount) >= player->boardOffset && player->boardOffset != 0)
+	if ((location + amount) >= player->boardOffset && player->boardOffset != 0 && location < player->boardOffset)
 	{
 		reachesFinish = true;
 	}
