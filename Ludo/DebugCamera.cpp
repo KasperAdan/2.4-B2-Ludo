@@ -19,6 +19,8 @@ glm::mat4 DebugCamera::getViewMatrix()
 
 void DebugCamera::update(GLFWwindow* window)
 {
+	float moveSpeed = 0.15f;
+
 	double x, y;
 	glfwGetCursorPos(window, &x, &y);
 
@@ -32,17 +34,17 @@ void DebugCamera::update(GLFWwindow* window)
 	lastY = y;
 
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		move(0, 0.05f);
+		move(0, moveSpeed);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		move(180, 0.05f);
+		move(180, moveSpeed);
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		move(90, 0.05f);
+		move(90, moveSpeed);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		move(-90, 0.05f);
+		move(-90, moveSpeed);
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		position.y -= 0.05f;
+		position.y -= moveSpeed;
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		position.y += 0.05f;
+		position.y += moveSpeed;
 }
 
 void DebugCamera::move(float angle, float fac)

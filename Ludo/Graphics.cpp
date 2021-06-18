@@ -15,7 +15,10 @@
 #include <iostream>
 #include <thread>
 #include "Graphics.h"
-#include <functional>
+#define STB_TRUETYPE_IMPLEMENTATION
+#include "stb_truetype.h"
+#include "Number.h"
+
 
 using tigl::Vertex;
 
@@ -24,28 +27,17 @@ using tigl::Vertex;
 #pragma comment(lib, "opengl32.lib")
 
 struct JSONLoader::boardPositions* positions;
+GLuint textTexId;
+stbtt_bakedchar* cdata;
 
 
 Graphics::Graphics()
 {
-    //game = GameLogic(4);
-    //dobble d = dobble();
+    cdata = new stbtt_bakedchar();
 
     JSONLoader* jsonLoader = new JSONLoader();
     positions = new struct JSONLoader::boardPositions();
     jsonLoader->loadPositions(positions);
-
-    //for (int i = 0; i < 40; i++)
-    //    positions.playPositions[i] = glm::vec3(-8 + (0.5f * i), 0, 0);
-
-    //for (int i = 0; i < 4; i++)
-    //    positions.blueStartPositions[i] = glm::vec3(-4, 0, -5 + (i * 0.5f));
-    //for (int i = 0; i < 4; i++)
-    //    positions.redStartPositions[i] = glm::vec3(-2, 0, -5 + (i * 0.5f));
-    //for (int i = 0; i < 4; i++)
-    //    positions.yellowStartPositions[i] = glm::vec3(0, 0, -5 + (i * 0.5f));
-    //for (int i = 0; i < 4; i++)
-    //    positions.greenStartPositions[i] = glm::vec3(2, 0, -5 + (i * 0.5f));
 }
 
 Graphics::~Graphics()
@@ -88,7 +80,7 @@ void Graphics::init()
         });
 
     // Create camera
-    camera = new Camera();
+    camera = new DebugCamera(window);
     camera->moveTo(glm::vec3(-7.28f, -8.0f, -12.0f), glm::vec3(45, 0, 0));
 
     // Create board
@@ -123,6 +115,40 @@ void Graphics::init()
         drawables.push_back(p);
         pawns.push_back(p);
     }
+
+    std::string numberNames[4] = { "one", "two", "three", "four" };
+    for (int i = 0; i < 4; i++)
+    {
+        Number* n = new Number(new Texture("Resource/numbers/" + numberNames[i] + ".png"));
+        n->position = glm::vec3(100);
+        numbers.push_back(n);
+        drawables.push_back(n);
+    }
+    
+    //Number* n2 = new Number(new Texture("Resource/numbers/one.png"));
+    //numbers.push_back(n2);
+    //drawables.push_back(n2);
+    //Number* n3 = new Number(new Texture("Resource/numbers/one.png"));
+    //numbers.push_back(n3);
+    //drawables.push_back(n3);
+    //Number* n4 = new Number(new Texture("Resource/numbers/one.png"));
+    //numbers.push_back(n4);
+    //drawables.push_back(n4);
+
+    // Init text
+    unsigned char* ttf_buffer = new unsigned char[1 << 20];
+    unsigned char* temp_bitmap = new unsigned char[512 * 512];
+    FILE* file;
+    fopen_s(&file, "Resource/yugioh_font.ttf", "rb");
+    fread(ttf_buffer, 1, 1 << 20, file);
+    stbtt_BakeFontBitmap(ttf_buffer, 0, 32.0, temp_bitmap, 512, 512, 32, 96, cdata);
+    glGenTextures(1, &textTexId);
+    glBindTexture(GL_TEXTURE_2D, textTexId);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, 512, 512, 0, GL_ALPHA, GL_UNSIGNED_BYTE, temp_bitmap);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    delete[] ttf_buffer;
+    delete[] temp_bitmap;
 
     // Init all drawables
     for (auto& d : drawables) {
@@ -163,6 +189,10 @@ void Graphics::draw()
     tigl::shader->enableColorMult(true);
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    //drawText("Test", glm::vec3(0));
 
     // Draw all drawables
     for (auto& d : drawables) {
@@ -344,5 +374,72 @@ void Graphics::finishPawn(state color, int finishPos, int pawnPos)
             }
             break;
         }
+    }
+}
+
+void Graphics::drawText(std::string text, glm::vec3 pos)
+{
+    // Bind texture
+    glBindTexture(GL_TEXTURE_2D, textTexId);
+    tigl::shader->setColorMult(glm::vec4(1,1,1,1));
+
+    // Draw text
+    float x = pos.x;
+    float y = pos.y;
+    stbtt_aligned_quad q;
+    tigl::begin(GL_QUADS);
+    for (int i = 0; i < text.size(); i++) {
+        if (text[i] >= 32 && text[i] < 128) {
+            stbtt_GetBakedQuad(cdata, 256, 256, text[i] - 32, &x, &y, &q, 1);
+            tigl::addVertex(Vertex::PT(glm::vec3(q.x0, q.y0, 0), glm::vec2(q.s0, q.t0)));
+            tigl::addVertex(Vertex::PT(glm::vec3(q.x1, q.y0, 0), glm::vec2(q.s1, q.t0)));
+            tigl::addVertex(Vertex::PT(glm::vec3(q.x1, q.y1, 0), glm::vec2(q.s1, q.t1)));
+            tigl::addVertex(Vertex::PT(glm::vec3(q.x0, q.y1, 0), glm::vec2(q.s0, q.t1)));
+        }
+    }
+    tigl::end();
+}
+
+void Graphics::drawNumbers(state color, int n1, int n2, int n3, int n4)
+{
+    glm::vec3 pawn1;
+    if (n1 == 99) {
+        switch (color) {
+        case state::blue:
+            pawn1 = positions->blueStartPositions[0];
+            break;
+        case state::red:
+            pawn1 = positions->redStartPositions[0];
+            break;
+        case state::yellow:
+            pawn1 = positions->yellowStartPositions[0];
+            break;
+        case state::green:
+            pawn1 = positions->greenStartPositions[0];
+            break;
+        }
+    }
+    else {
+        pawn1 = positions->playPositions[n1];
+    }
+
+    drawNumbers_internal(n1 != -1 ? pawn1 + glm::vec3(1.8f, 2, 0) : glm::vec3(100),
+        n2 != -1 ? positions->playPositions[n2] + glm::vec3(1.8f, 2, 0) : glm::vec3(100),
+        n3 != -1 ? positions->playPositions[n3] + glm::vec3(1.8f, 2, 0) : glm::vec3(100),
+        n4 != -1 ? positions->playPositions[n4] + glm::vec3(1.8f, 2, 0) : glm::vec3(100));
+}
+
+void Graphics::drawNumbers_internal(glm::vec3 n1, glm::vec3 n2, glm::vec3 n3, glm::vec3 n4)
+{
+    numbers.at(0)->position = n1;
+    numbers.at(1)->position = n2;
+    numbers.at(2)->position = n3;
+    numbers.at(3)->position = n4;
+}
+
+void Graphics::stopDrawingNumbers()
+{
+    for (int i = 0; i < 4; i++) {
+        numbers.at(i)->position = glm::vec3(100);
     }
 }

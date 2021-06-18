@@ -14,7 +14,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 {
 	board = BoardLogic(amountOfPlayers);
 	graphics = Graphics();
-	Dobble d = Dobble(0);
+	//Dobble d = Dobble(0);
 
 	playerTurn = 0;
 	running = true;
@@ -27,8 +27,9 @@ GameLogic::GameLogic(int amountOfPlayers)
 		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", its your turn to doble: \n\n";
 
 		int diceFound = -1;
-		diceFound = d.findDice();
-		std::cout << diceFound <<  "\n\n";
+		//diceFound = d.findDice();
+		//std::cout << diceFound <<  "\n\n";
+		std::cin >> diceFound;
 		
 		//get choices
 		std::vector<int> playerPawns = board.getPawnLocations(board.players[playerTurn]);
@@ -72,12 +73,27 @@ GameLogic::GameLogic(int amountOfPlayers)
 			continue;
 		}
 
-		//choose option (finger detection)
-		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your selected option: ";
 		int pawnValue = -1;
-		while (pawnValue >= possiblePawns.size() || pawnValue < 0)
-		{
-			std::cin >> pawnValue;
+		if (possiblePawns.size() < 2) {
+			pawnValue = 0;
+		}
+		else {
+			//choose option (finger detection)
+			std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your selected option: ";
+
+			// Display options in 3D scene
+			graphics.drawNumbers(board.players[playerTurn].playerColor,
+				possiblePawns.size() > 0 ? possiblePawns.at(0) : -1,
+				possiblePawns.size() > 1 ? possiblePawns.at(1) : -1,
+				possiblePawns.size() > 2 ? possiblePawns.at(2) : -1,
+				possiblePawns.size() > 3 ? possiblePawns.at(3) : -1);
+
+			while (pawnValue >= possiblePawns.size() || pawnValue < 0)
+			{
+				std::cin >> pawnValue;
+			}
+
+			graphics.stopDrawingNumbers();
 		}
 
 		//change board
@@ -88,11 +104,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 		}
 		else
 		{
-			//for (int i = 0; i < dobbleValue; i++) {
-				board.movePawn(possiblePawns[pawnValue], diceFound, graphics);
-				//graphics.movePawn(0, glm::vec3(-4, 0, 4));
-				//while (graphics.isMoving(possiblePawns[pawnValue])) {}
-			//}
+			board.movePawn(possiblePawns[pawnValue], diceFound, graphics);
 		}
 
 		//next player

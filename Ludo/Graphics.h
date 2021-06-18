@@ -16,6 +16,7 @@
 #include <iostream>
 #include <thread>
 #include "Graphics.h"
+#include "Number.h"
 
 class Graphics
 {
@@ -23,8 +24,11 @@ private:
 	GLFWwindow* window;
 	std::list<Drawable*> drawables;
 	std::vector<Pawn*> pawns;
+	std::vector<Number*> numbers;
 	double timeLastFrame = 0;
 	Camera* camera;
+
+	void drawNumbers_internal(glm::vec3 = glm::vec3(100), glm::vec3 = glm::vec3(100), glm::vec3 = glm::vec3(100), glm::vec3 = glm::vec3(100));
 
 public:
 	Graphics();
@@ -36,13 +40,14 @@ public:
 	void draw();
 
 	void moveFromBase(state, int, bool, state);
-	void movePawn(int, glm::vec3);
 	void movePawn(int, int);
-	void attackPawn(int, glm::vec3);
 	void attackPawn(int, int, state);
 	void returnToBase(int, state);
 	bool isMoving(int);
 	bool isAttacking(int);
 	void finishPawn(state, int, int);
+	void drawText(std::string, glm::vec3);
+	void drawNumbers(state, int = -1, int = -1, int = -1, int = -1);
+	void stopDrawingNumbers();
 };
 

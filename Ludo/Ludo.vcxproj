@@ -173,6 +173,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="JSONLoader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Number.cpp" />
     <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="PlayerLogic.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="dobble.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Number.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="JSONLoader.h" />
@@ -196,6 +198,7 @@
     <ClInclude Include="PlayerLogic.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="stb_truetype.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
