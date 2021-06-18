@@ -10,7 +10,7 @@ int hmax = 35,	smax = 150,	vmax = 250;
 
 int fingerCount;
 int handDetectionWebcam;
-VideoCapture webcam;
+
 
 HandDetection::HandDetection(int handDetectionWebcamNr)
 {
@@ -28,17 +28,18 @@ HandDetection::HandDetection(int handDetectionWebcamNr)
 
 int HandDetection::findFingers() {
 
+	VideoCapture webcam;
 	webcam.open(handDetectionWebcam);
 
 	int fingerCountReturn = 0;
 	int previousFingerCount = 0;
-	int fingerLoopsThreshold = 20;
+	int fingerLoopsThreshold = 35;
 	int currentFingerLoops = 0;
 
 	while (1) {
 		Mat cameraFrame, hsvFrame, thresholdFrame;
-
 		webcam.read(cameraFrame);
+
 		//switch the RGB to HSV space
 		cvtColor(cameraFrame, hsvFrame, COLOR_BGR2HSV);
 
@@ -54,24 +55,26 @@ int HandDetection::findFingers() {
 		//calculate the center point of the hand
 		fingerCountReturn = trackHand(thresholdFrame, cameraFrame);
 
-		if (fingerCountReturn == previousFingerCount) {
+		if (fingerCountReturn == previousFingerCount && fingerCountReturn != 0) {
 			currentFingerLoops++;
 		}
 		else currentFingerLoops = 0;
 
 		previousFingerCount = fingerCountReturn;
 
-		imshow("webcam", cameraFrame);
+		imshow("Final Image", cameraFrame);
 
 		//release the memory
-		cameraFrame.release();
+		//cameraFrame.release();
 
 		if (currentFingerLoops == fingerLoopsThreshold) break;
 
+
+		waitKey(1);
 	}
 
 	//Destroy all windows, close webcam
-	destroyWindow("webcam");
+	destroyWindow("Final Image");
 	destroyWindow("treshold");
 	destroyWindow("threshold noise reduced");
 	webcam.release();
@@ -131,15 +134,26 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 		rectangle(dest, boundRect, Scalar(0, 0, 255), 2, 8, 0);
 
 		if (handFound) {
+			fingerCount = 0;
+			int maxdist = 0;
+			int countHullPoint = convexHullPoint.size();
 
 			int pos = 0;
-			for (int i = 1; i < convexHullPoint.size(); i++) {
+			for (int i = 1; i < countHullPoint; i++) {
 
 				pos = i;
 				if (centerP.y >= convexHullPoint[i].y && centerP.y >= convexHullPoint[pos].y) {
 
 					pos = i;
-					if (i == 0 || abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) >= 12) {
+					int dist = (centerP.x - convexHullPoint[i].x) ^ 2 + (centerP.y - convexHullPoint[i].y) ^ 2;
+					if (abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) < 12) {
+
+						if (dist > maxdist) {
+							maxdist = dist;
+							pos = i;
+						}
+					}
+					else if (i == 0 || abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) >= 12) {
 
 						fingerCount++;
 						line(dest, centerP, convexHullPoint[pos], Scalar(0, 255, 0), 3, 8, 0);
@@ -150,8 +164,8 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 			}
 
 			//Limit to 5 fingers
-			if (fingerCount > 5) {
-				fingerCount = 5;
+			if (fingerCount > 4) {
+				fingerCount = 4;
 			}
 			
 			putText(dest, to_string(fingerCount), printPoint, 1, 5, Scalar(0, 255, 0), 1, 5, false);

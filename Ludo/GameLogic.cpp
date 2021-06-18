@@ -15,6 +15,8 @@ GameLogic::GameLogic(int amountOfPlayers)
 	board = BoardLogic(amountOfPlayers);
 	graphics = Graphics();
 	Dobble d = Dobble(0);
+	
+	HandDetection h = HandDetection(1);
 
 	playerTurn = 0;
 	running = true;
@@ -75,10 +77,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 		//choose option (finger detection)
 		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your selected option: ";
 		int pawnValue = -1;
-		while (pawnValue >= possiblePawns.size() || pawnValue < 0)
-		{
-			std::cin >> pawnValue;
-		}
+		pawnValue = h.findFingers() - 1;
 
 		//change board
 		if (possiblePawns[pawnValue] == 99)
