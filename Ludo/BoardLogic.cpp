@@ -84,33 +84,45 @@ bool BoardLogic::spawnPawnCheck(PlayerLogic* player)
 	return false;
 }
 
-
 //this method checks if a move is possible
 //this can be used to check if the user can choose this pawn to move or not
 bool BoardLogic::movePawnCheck(int location, int amount)
 {
 	PlayerLogic player = getPlayerByColor(board[location]);
-	
+
 	if (board[(location + amount) % 40] == player.playerColor)//check for own pawn in new position
 	{
 		return false;
 	}
 
-	if (location + amount < player.boardOffset) 
+	if (player.boardOffset == 0 && location + amount < 40)
 	{
-		int offsetLocation = location + amount + (40 - player.boardOffset);
-		if (offsetLocation < 40)//check if pawn reaches finish
+		return true;
+	}
+
+	if ((location + amount) >= 40 && player.boardOffset != 0)
+	{
+		if ((location + amount) % 40 < player.boardOffset)// true: the pawn doesnt reach finish
 		{
 			return true;
 		}
 	}
-	else if(location + amount < 40 + player.boardOffset)//check if pawn reaches finish
+	if ((location + amount) < player.boardOffset && player.boardOffset != 0)// true: the pawn doesnt reach finish
 	{
 		return true;
 	}
 	else //pawn reaches finish
 	{
-		int finishLocation = (location + amount) - (40 + player.boardOffset);
+		int finishLocation;
+		if (player.boardOffset == 0)
+		{
+			finishLocation = (location + amount) - 40;
+		}
+		else
+		{
+			finishLocation = (location + amount) - ((player.boardOffset + 40) % 40);
+		}
+
 		if (finishLocation > 3)
 		{
 			finishLocation = 3 - (finishLocation - 3);
@@ -126,25 +138,37 @@ bool BoardLogic::movePawnCheck(int location, int amount)
 //this method moves the selected pawn
 void BoardLogic::movePawn(int location, int amount, Graphics gph)
 {
-	PlayerLogic *player = getPlayerByColorPointer(board[location]);
+	PlayerLogic* player = getPlayerByColorPointer(board[location]);
 	bool reachesFinish = false;
 
-	if (location + amount < player->boardOffset)
-	{
-		int offsetLocation = location + amount + (40 - player->boardOffset);
-		if (offsetLocation >= 40)//check if pawn reaches finish
-		{
-			reachesFinish = true;
-		}
-	}
-	else if (location + amount >= 40 + player->boardOffset)//check if pawn reaches finish
+	if (player->boardOffset == 0 && location + amount >= 40)
 	{
 		reachesFinish = true;
 	}
 
-	if (reachesFinish) //pawn reached finish
+	if ((location + amount) >= 40 && player->boardOffset != 0)
 	{
-		int finishLocation = (location + amount) - (40 + player->boardOffset);
+		if ((location + amount) % 40 >= player->boardOffset)
+		{
+			reachesFinish = true;
+		}
+	}
+	if ((location + amount) >= player->boardOffset && player->boardOffset != 0)
+	{
+		reachesFinish = true;
+	}
+	if (reachesFinish)
+	{
+		int finishLocation;
+		if (player->boardOffset == 0)
+		{
+			finishLocation = (location + amount) - 40;
+		}
+		else
+		{
+			finishLocation = (location + amount) - ((player->boardOffset + 40) % 40);
+		}
+
 		if (finishLocation > 3)
 		{
 			finishLocation = 3 - (finishLocation - 3);
@@ -154,7 +178,6 @@ void BoardLogic::movePawn(int location, int amount, Graphics gph)
 		gph.finishPawn(player->playerColor, finishLocation, location);
 		return;
 	}
-
 	if (board[(location + amount) % 40] != state::empty)//check for an enemy on new position
 	{
 		state enemyColor = board[(location + amount) % 40];
