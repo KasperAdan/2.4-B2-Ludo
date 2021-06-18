@@ -61,10 +61,16 @@ GameLogic::GameLogic(int amountOfPlayers)
 		}
 
 		std::cout << "the pawns you can move are on position \n";
-		int j = 0;
+		int j = 1;
 		for (int i : possiblePawns)
 		{
-			std::cout << "option " << j << ": " << i << "\n";
+			if (i == 99)
+			{
+				std::cout << "\t option " << j << ": " << "New Pawn" << "\n";
+				j++;
+				continue;
+			}
+			std::cout << "\t option " << j << ": " << i << "\n";
 			j++;
 		}
 
@@ -75,7 +81,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 		}
 
 		//choose option (finger detection)
-		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your selected option: ";
+		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", enter your selected option: \n";
 		int pawnValue = -1;
 		pawnValue = h.findFingers() - 1;
 
