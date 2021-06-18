@@ -14,7 +14,9 @@ GameLogic::GameLogic(int amountOfPlayers)
 {
 	board = BoardLogic(amountOfPlayers);
 	graphics = Graphics();
-	//Dobble d = Dobble(0);
+	Dobble d = Dobble(0);
+	
+	HandDetection h = HandDetection(1);
 
 	playerTurn = 0;
 	running = true;
@@ -27,9 +29,9 @@ GameLogic::GameLogic(int amountOfPlayers)
 		std::cout << "color " << getStringEnum(board.players[playerTurn].playerColor) << ", its your turn to doble: \n\n";
 
 		int diceFound = -1;
-		//diceFound = d.findDice();
-		//std::cout << diceFound <<  "\n\n";
-		std::cin >> diceFound;
+		diceFound = d.findDice();
+		std::cout << diceFound <<  "\n\n";
+		//std::cin >> diceFound;
 		
 		//get choices
 		std::vector<int> playerPawns = board.getPawnLocations(board.players[playerTurn]);
@@ -60,10 +62,16 @@ GameLogic::GameLogic(int amountOfPlayers)
 		}
 
 		std::cout << "the pawns you can move are on position \n";
-		int j = 0;
+		int j = 1;
 		for (int i : possiblePawns)
 		{
-			std::cout << "option " << j << ": " << i << "\n";
+			if (i == 99)
+			{
+				std::cout << "\t option " << j << ": " << "New Pawn" << "\n";
+				j++;
+				continue;
+			}
+			std::cout << "\t option " << j << ": " << i << "\n";
 			j++;
 		}
 
@@ -90,7 +98,8 @@ GameLogic::GameLogic(int amountOfPlayers)
 
 			while (pawnValue >= possiblePawns.size() || pawnValue < 0)
 			{
-				std::cin >> pawnValue;
+                pawnValue = h.findFingers() - 1;
+				// std::cin >> pawnValue;
 			}
 
 			graphics.stopDrawingNumbers();
@@ -217,19 +226,19 @@ std::string GameLogic::getStringEnum(state color)
 {
 	switch (color)
 	{
-		case empty:
+		case state::empty:
 			return "empty";
 			break;
-		case blue:
+		case state::blue:
 			return "blue";
 			break;
-		case red:
+		case state::red:
 			return "red";
 			break;
-		case yellow:
+		case state::yellow:
 			return "yellow";
 			break;
-		case green:
+		case state::green:
 			return "green";
 			break;
 		default:

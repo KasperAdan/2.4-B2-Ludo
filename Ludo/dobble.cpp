@@ -27,11 +27,11 @@ int Dobble::findDice() {
     webcam.open(webcamNr);
 
     while (1) {
-        Mat image, grayImage, cannyImage;
-        webcam.read(image);
+        Mat cameraFrame, grayImage, cannyImage;
+        webcam.read(cameraFrame);
 
         //Converts image to grey, and Canny image
-        cvtColor(image, grayImage, COLOR_BGR2GRAY);
+        cvtColor(cameraFrame, grayImage, COLOR_BGR2GRAY);
         blur(grayImage, grayImage, Size(3, 3));
         threshold(grayImage, grayImage, 170, 255, THRESH_BINARY);
         Canny(grayImage, cannyImage, 80, 230);
@@ -48,7 +48,7 @@ int Dobble::findDice() {
             RotatedRect rect = minAreaRect(diceContours[i]);
 
             //Values for webcam, can differ from webcam
-            if ((rect.size.area() > 500) && (rect.size.area() < 5000)) {
+            if ((rect.size.area() > 3500) && (rect.size.area() < 5000)) {
 
                 // Check if it's a duplicate rectangle
                 bool process = true;
@@ -71,7 +71,7 @@ int Dobble::findDice() {
                     rect.points(points);
                     for (int j = 0; j < 4; j++) {
 
-                        line(image, points[j], points[(j + 1) % 4], Scalar(0, 0, 255), 2, LINE_AA);
+                        line(cameraFrame, points[j], points[(j + 1) % 4], Scalar(0, 0, 255), 2, LINE_AA);
                     }
                 }
             }
@@ -80,7 +80,7 @@ int Dobble::findDice() {
         // Write dice count on screen
         char text[32];
         sprintf_s(text, "Dice: %d", (int)diceRects.size());
-        putText(image, text, Point(20, 30), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
+        putText(cameraFrame, text, Point(20, 30), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
 
         // Counting dots of each die
         diceCountsV.clear();
@@ -131,7 +131,7 @@ int Dobble::findDice() {
             }
 
             // Save dots count
-            if (dotsRects.size() >= 1 && dotsRects.size() <= 6) {
+            if (dotsRects.size() > 0 && dotsRects.size() <= 6) {
                 diceCountsV.push_back(dotsRects.size());
             }
         }
@@ -145,7 +145,7 @@ int Dobble::findDice() {
             break;
         }
 
-        //We need to sort the Vector so we can print it in order on sreen
+        //Sorts the Vector so we can print it in order on screen
         sort(diceCountsV.begin(), diceCountsV.end());
         int vectorIndex = 0;
 
@@ -154,7 +154,7 @@ int Dobble::findDice() {
 
             int count = 0;
 
-            //If the value in the Vector equals I, we need to print the value
+            //If the value in the Vector equals i, we need to print the value
             //This ignores the values we dont have
             if (vectorIndex < diceCountsV.size() && diceCountsV.at(vectorIndex) - 1 == i) {
                 count++;
@@ -162,18 +162,19 @@ int Dobble::findDice() {
             }
 
             sprintf_s(text, "%d: %d", (i + 1), count);
-            putText(image, text, Point(20, 55 + 25 * i), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
+            putText(cameraFrame, text, Point(20, 55 + 25 * i), FONT_HERSHEY_DUPLEX, 0.8, Scalar(0, 255, 0), 1, LINE_AA);
             
         }
 
         //Remember the last dice roll
         lastDiceCountsV = diceCountsV;
 
-        imshow("Final Image", image);
+        imshow("Final Image", cameraFrame);
 
         waitKey(1);
     }
 
+    //Cleanup
     destroyWindow("Final Image");
     webcam.release();
     
