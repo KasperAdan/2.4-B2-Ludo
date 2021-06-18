@@ -10,8 +10,6 @@
 class GameLogic
 {
 public:
-	//BoardLogic board;
-	//Graphics graphics;
 	int playerTurn;
 	bool running;
 

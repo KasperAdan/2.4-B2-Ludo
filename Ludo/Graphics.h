@@ -46,7 +46,6 @@ public:
 	bool isMoving(int);
 	bool isAttacking(int);
 	void finishPawn(state, int, int);
-	void drawText(std::string, glm::vec3);
 	void drawNumbers(state, int = -1, int = -1, int = -1, int = -1);
 	void stopDrawingNumbers();
 };

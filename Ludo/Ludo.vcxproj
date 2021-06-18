@@ -198,7 +198,6 @@
     <ClInclude Include="PlayerLogic.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="stb_truetype.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>

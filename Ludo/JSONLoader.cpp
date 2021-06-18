@@ -18,25 +18,11 @@ bool JSONLoader::loadPositions(boardPositions* positions)
 {
 	ifstream file("Resource/Ludo_Positions.json");
 
-	// Loop through all the lines in Ludo_Positions and store each line into newJsonString
-	//while (getline(file, jsonString))
-	//{
-	//	newJsonString = newJsonString + jsonString;
-	//}
-
 	Json::CharReaderBuilder builder;
 	Json::Value root;
 	bool parsingSuccesful = Json::parseFromStream(builder, file, &root, nullptr);
 
-	//Json::CharReader* reader = builder.newCharReader();
-
-	// Parse newJsonString into root
-	//bool parsingSuccesful = reader->parse(newJsonString.c_str(), newJsonString.c_str() + newJsonString.size(), &root, &errors);
-	//delete reader;
-
 	if (!parsingSuccesful) {
-	//	cout << jsonString << endl;
-	//	cout << errors << endl;
 		cout << "Error reading json!!!!" << endl;
 	}
 
@@ -71,7 +57,7 @@ void JSONLoader::fillArrays(boardPositions* positions, Json::Value root) {
 	for (int i = 0; i < greenStartArray.size(); i++)
 		positions->greenStartPositions[i] = glm::vec3((greenStartArray[i][0].asFloat() / 1000.0f) * 10, 0, (greenStartArray[i][1].asFloat() / 1000.0f) * 10);
 
-	Json::Value greenEndArray = root["Yellow"]["End"];
+	Json::Value greenEndArray = root["Green"]["End"];
 	for (int i = 0; i < greenEndArray.size(); i++)
 		positions->greenEndPositions[i] = glm::vec3((greenEndArray[i][0].asFloat() / 1000.0f) * 10, 0, (greenEndArray[i][1].asFloat() / 1000.0f) * 10);
 
@@ -79,7 +65,7 @@ void JSONLoader::fillArrays(boardPositions* positions, Json::Value root) {
 	for (int i = 0; i < yellowStartArray.size(); i++)
 		positions->yellowStartPositions[i] = glm::vec3((yellowStartArray[i][0].asFloat() / 1000.0f) * 10, 0, (yellowStartArray[i][1].asFloat() / 1000.0f) * 10);
 
-	Json::Value yellowEndArray = root["Green"]["End"];
+	Json::Value yellowEndArray = root["Yellow"]["End"];
 	for (int i = 0; i < yellowEndArray.size(); i++)
 		positions->yellowEndPositions[i] = glm::vec3((yellowEndArray[i][0].asFloat() / 1000.0f) * 10, 0, (yellowEndArray[i][1].asFloat() / 1000.0f) * 10);
 }

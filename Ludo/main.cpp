@@ -1,7 +1,6 @@
 #include "GameLogic.h"
 #include <iostream>
 
-
 GameLogic game;
 
 int main(void)

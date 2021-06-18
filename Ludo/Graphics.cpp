@@ -124,31 +124,6 @@ void Graphics::init()
         numbers.push_back(n);
         drawables.push_back(n);
     }
-    
-    //Number* n2 = new Number(new Texture("Resource/numbers/one.png"));
-    //numbers.push_back(n2);
-    //drawables.push_back(n2);
-    //Number* n3 = new Number(new Texture("Resource/numbers/one.png"));
-    //numbers.push_back(n3);
-    //drawables.push_back(n3);
-    //Number* n4 = new Number(new Texture("Resource/numbers/one.png"));
-    //numbers.push_back(n4);
-    //drawables.push_back(n4);
-
-    //// Init text
-    //unsigned char* ttf_buffer = new unsigned char[1 << 20];
-    //unsigned char* temp_bitmap = new unsigned char[512 * 512];
-    //FILE* file;
-    //fopen_s(&file, "Resource/yugioh_font.ttf", "rb");
-    //fread(ttf_buffer, 1, 1 << 20, file);
-    //stbtt_BakeFontBitmap(ttf_buffer, 0, 32.0, temp_bitmap, 512, 512, 32, 96, cdata);
-    //glGenTextures(1, &textTexId);
-    //glBindTexture(GL_TEXTURE_2D, textTexId);
-    //glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, 512, 512, 0, GL_ALPHA, GL_UNSIGNED_BYTE, temp_bitmap);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-    //delete[] ttf_buffer;
-    //delete[] temp_bitmap;
 
     // Init all drawables
     for (auto& d : drawables) {
@@ -375,29 +350,6 @@ void Graphics::finishPawn(state color, int finishPos, int pawnPos)
             break;
         }
     }
-}
-
-void Graphics::drawText(std::string text, glm::vec3 pos)
-{
-    //// Bind texture
-    //glBindTexture(GL_TEXTURE_2D, textTexId);
-    //tigl::shader->setColorMult(glm::vec4(1,1,1,1));
-
-    //// Draw text
-    //float x = pos.x;
-    //float y = pos.y;
-    //stbtt_aligned_quad q;
-    //tigl::begin(GL_QUADS);
-    //for (int i = 0; i < text.size(); i++) {
-    //    if (text[i] >= 32 && text[i] < 128) {
-    //        stbtt_GetBakedQuad(cdata, 256, 256, text[i] - 32, &x, &y, &q, 1);
-    //        tigl::addVertex(Vertex::PT(glm::vec3(q.x0, q.y0, 0), glm::vec2(q.s0, q.t0)));
-    //        tigl::addVertex(Vertex::PT(glm::vec3(q.x1, q.y0, 0), glm::vec2(q.s1, q.t0)));
-    //        tigl::addVertex(Vertex::PT(glm::vec3(q.x1, q.y1, 0), glm::vec2(q.s1, q.t1)));
-    //        tigl::addVertex(Vertex::PT(glm::vec3(q.x0, q.y1, 0), glm::vec2(q.s0, q.t1)));
-    //    }
-    //}
-    //tigl::end();
 }
 
 void Graphics::drawNumbers(state color, int n1, int n2, int n3, int n4)

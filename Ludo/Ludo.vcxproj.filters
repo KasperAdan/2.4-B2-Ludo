@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Vision">
       <UniqueIdentifier>{b6c7de50-1f42-4f27-8666-cb21e045f331}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Vision">
+      <UniqueIdentifier>{5fc36331-a25d-4b8c-aa40-3cab09bc3bd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tigl.cpp">
@@ -60,9 +63,6 @@
     <ClCompile Include="ObjModel.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="BoardLogic.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
@@ -78,13 +78,16 @@
     <ClCompile Include="JSONLoader.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HandDetection.cpp">
       <Filter>Source Files\Vision</Filter>
     </ClCompile>
     <ClCompile Include="Number.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,9 +116,6 @@
     <ClInclude Include="tigl.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ObjModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BoardLogic.h">
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
@@ -128,23 +128,23 @@
     <ClInclude Include="state.h">
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
-    <ClInclude Include="dobble.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="JSONLoader.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="handDetection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_truetype.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Number.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModel.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="handDetection.h">
+      <Filter>Header Files\Vision</Filter>
+    </ClInclude>
+    <ClInclude Include="dobble.h">
+      <Filter>Header Files\Vision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
