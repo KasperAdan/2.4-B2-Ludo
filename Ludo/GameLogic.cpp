@@ -205,19 +205,19 @@ std::string GameLogic::getStringEnum(state color)
 {
 	switch (color)
 	{
-		case empty:
+		case state::empty:
 			return "empty";
 			break;
-		case blue:
+		case state::blue:
 			return "blue";
 			break;
-		case red:
+		case state::red:
 			return "red";
 			break;
-		case yellow:
+		case state::yellow:
 			return "yellow";
 			break;
-		case green:
+		case state::green:
 			return "green";
 			break;
 		default:

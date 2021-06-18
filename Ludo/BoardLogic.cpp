@@ -192,7 +192,7 @@ PlayerLogic* BoardLogic::getPlayerByColorPointer(state color)
 			return &players[i];
 		}
 	}
-	PlayerLogic player = PlayerLogic(empty, 0);
+	PlayerLogic player = PlayerLogic(state::empty, 0);
 	return &player;
 }
 
@@ -218,7 +218,7 @@ void BoardLogic::printBoard()
 		std::cout << "\tcolor:" << getStringEnum(player.playerColor) << ":\t";
 		for (int i = 0; i < 4; i++)
 		{
-			if (player.finish[i] == empty)
+			if (player.finish[i] == state::empty)
 			{
 				std::cout << " . ";
 			}
@@ -237,19 +237,19 @@ void BoardLogic::printBoard()
 	{
 		switch (s)
 		{
-		case empty:
+		case state::empty:
 			std::cout << "_";
 			break;
-		case blue:
+		case state::blue:
 			std::cout << "B";
 			break;
-		case red:
+		case state::red:
 			std::cout << "R";
 			break;
-		case yellow:
+		case state::yellow:
 			std::cout << "Y";
 			break;
-		case green:
+		case state::green:
 			std::cout << "G";
 			break;
 		default:
@@ -264,19 +264,19 @@ std::string BoardLogic::getStringEnum(state color)
 {
 	switch (color)
 	{
-	case empty:
+	case state::empty:
 		return "empty";
 		break;
-	case blue:
+	case state::blue:
 		return "blue";
 		break;
-	case red:
+	case state::red:
 		return "red";
 		break;
-	case yellow:
+	case state::yellow:
 		return "yellow";
 		break;
-	case green:
+	case state::green:
 		return "green";
 		break;
 	default:
