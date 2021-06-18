@@ -15,10 +15,7 @@
 #include <iostream>
 #include <thread>
 #include "Graphics.h"
-#define STB_TRUETYPE_IMPLEMENTATION
-#include "stb_truetype.h"
 #include "Number.h"
-
 
 using tigl::Vertex;
 
@@ -27,14 +24,9 @@ using tigl::Vertex;
 #pragma comment(lib, "opengl32.lib")
 
 struct JSONLoader::boardPositions* positions;
-GLuint textTexId;
-stbtt_bakedchar* cdata;
-
 
 Graphics::Graphics()
 {
-    cdata = new stbtt_bakedchar();
-
     JSONLoader* jsonLoader = new JSONLoader();
     positions = new struct JSONLoader::boardPositions();
     jsonLoader->loadPositions(positions);
