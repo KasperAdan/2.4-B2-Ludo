@@ -26,6 +26,8 @@ int Dobble::findDice() {
     VideoCapture webcam;
     webcam.open(webcamNr);
 
+    int totalDiceDots = 0;
+
     while (1) {
         Mat cameraFrame, grayImage, cannyImage;
         webcam.read(cameraFrame);
@@ -84,7 +86,7 @@ int Dobble::findDice() {
 
         // Counting dots of each die
         diceCountsV.clear();
-        int totalDiceDots = 0;
+        totalDiceDots = 0;
         
         for (int i = 0; i < diceRects.size(); i++) {
 

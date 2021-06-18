@@ -107,7 +107,7 @@ bool BoardLogic::movePawnCheck(int location, int amount)
 			return true;
 		}
 	}
-	if ((location + amount) < player.boardOffset && player.boardOffset != 0)// true: the pawn doesnt reach finish
+	if ((location + amount) < player.boardOffset && player.boardOffset != 0 || location >= player.boardOffset)// true: the pawn doesnt reach finish
 	{
 		return true;
 	}
