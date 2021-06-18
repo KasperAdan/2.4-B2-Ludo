@@ -65,7 +65,7 @@ int HandDetection::findFingers() {
 		imshow("Final Image", cameraFrame);
 
 		//release the memory
-		//cameraFrame.release();
+		cameraFrame.release();
 
 		if (currentFingerLoops == fingerLoopsThreshold) break;
 
@@ -91,6 +91,7 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 	vector<vector<Point> > contoursSet(contours.size());
 	vector<Vec4i> hierarchy;
 	vector<Point> convexHullPoint;
+	vector<Point> foundFingers;
 	Point centerP;
 	int numObjects = 0;
 	double area = 0;
@@ -134,44 +135,45 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 		rectangle(dest, boundRect, Scalar(0, 0, 255), 2, 8, 0);
 
 		if (handFound) {
+			bool validFinger = false;
 			fingerCount = 0;
 			int maxdist = 0;
-			int countHullPoint = convexHullPoint.size();
 
 			int pos = 0;
-			for (int i = 1; i < countHullPoint; i++) {
-
+			for (int i = 1; i < convexHullPoint.size(); i++) {
+				circle(dest, convexHullPoint[pos], 8, Scalar(255, 0, 0), FILLED);
+				
 				pos = i;
-				if (centerP.y >= convexHullPoint[i].y && centerP.y >= convexHullPoint[pos].y) {
+				//If finger is above hand centre, prevents wrist contours
+				if (centerP.y + 10 >= convexHullPoint[i].y && centerP.y + 10 >= convexHullPoint[pos].y) {
 
 					pos = i;
-					int dist = (centerP.x - convexHullPoint[i].x) ^ 2 + (centerP.y - convexHullPoint[i].y) ^ 2;
-					if (abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) < 12) {
-
-						if (dist > maxdist) {
-							maxdist = dist;
-							pos = i;
-						}
-					}
-					else if (i == 0 || abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) >= 12) {
-
-						fingerCount++;
-						line(dest, centerP, convexHullPoint[pos], Scalar(0, 255, 0), 3, 8, 0);
-						circle(dest, convexHullPoint[pos], 8, Scalar(255, 0, 0), FILLED);
+					//If next finger is at least so far away, prevents duplicate contours on same finger
+					if (i == 0 || abs(convexHullPoint[i - 1].x - convexHullPoint[i].x) >= 25) {
+						validFinger = true;
+						foundFingers.push_back(convexHullPoint[i]);
 						pos = i;
 					}
-				}
-			}
+					else if (convexHullPoint[i - 1].y > convexHullPoint[i].y && validFinger) {
 
-			//Limit to 5 fingers
-			if (fingerCount > 4) {
-				fingerCount = 4;
+						foundFingers.pop_back();
+						foundFingers.push_back(convexHullPoint[i]);
+
+					}
+					else validFinger = false;
+				}
+				
+			}
+			for(Point point : foundFingers) {
+				line(dest, centerP, point, Scalar(0, 255, 0), 3, 81, 0);
+				circle(dest, point, 8, Scalar(255, 0, 0), FILLED);
 			}
 			
-			putText(dest, to_string(fingerCount), printPoint, 1, 5, Scalar(0, 255, 0), 1, 5, false);
+			putText(dest, to_string(foundFingers.size()), printPoint, 1, 5, Scalar(0, 255, 0), 1, 5, false);
 		}
 	}
-	return fingerCount;
+	
+	return foundFingers.size() < 4 ? foundFingers.size() : 4;
 }
 
 //Reduces noice in image

@@ -48,7 +48,7 @@ int Dobble::findDice() {
             RotatedRect rect = minAreaRect(diceContours[i]);
 
             //Values for webcam, can differ from webcam
-            if ((rect.size.area() > 500) && (rect.size.area() < 5000)) {
+            if ((rect.size.area() > 3500) && (rect.size.area() < 5000)) {
 
                 // Check if it's a duplicate rectangle
                 bool process = true;
@@ -131,7 +131,7 @@ int Dobble::findDice() {
             }
 
             // Save dots count
-            if (dotsRects.size() >= 1 && dotsRects.size() <= 6) {
+            if (dotsRects.size() > 0 && dotsRects.size() <= 6) {
                 diceCountsV.push_back(dotsRects.size());
             }
         }
@@ -145,7 +145,7 @@ int Dobble::findDice() {
             break;
         }
 
-        //We need to sort the Vector so we can print it in order on sreen
+        //Sorts the Vector so we can print it in order on screen
         sort(diceCountsV.begin(), diceCountsV.end());
         int vectorIndex = 0;
 
@@ -154,7 +154,7 @@ int Dobble::findDice() {
 
             int count = 0;
 
-            //If the value in the Vector equals I, we need to print the value
+            //If the value in the Vector equals i, we need to print the value
             //This ignores the values we dont have
             if (vectorIndex < diceCountsV.size() && diceCountsV.at(vectorIndex) - 1 == i) {
                 count++;
@@ -174,6 +174,7 @@ int Dobble::findDice() {
         waitKey(1);
     }
 
+    //Cleanup
     destroyWindow("Final Image");
     webcam.release();
     
