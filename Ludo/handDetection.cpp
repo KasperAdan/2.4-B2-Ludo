@@ -47,9 +47,7 @@ int HandDetection::findFingers() {
 		inRange(hsvFrame, Scalar(hmin, smin, vmin), Scalar(hmax, smax, vmax), thresholdFrame);
 
 		//Erodes and Dilates for noise reduction
-		//imshow("treshold", thresholdFrame);
 		noiseReduction(thresholdFrame);
-		//imshow("threshold noise reduced", thresholdFrame);
 
 		//track the hand, put the bounding box around the hand
 		//calculate the center point of the hand
@@ -62,21 +60,17 @@ int HandDetection::findFingers() {
 
 		previousFingerCount = fingerCountReturn;
 
-		imshow("Hand Detection", cameraFrame);
+		imshow("Webcam", cameraFrame);
 
 		//release the memory
 		cameraFrame.release();
 
 		if (currentFingerLoops == fingerLoopsThreshold) break;
 
-
 		waitKey(1);
 	}
 
-	//Destroy all windows, close webcam
-	/*destroyWindow("Final Image");
-	destroyWindow("treshold");
-	destroyWindow("threshold noise reduced");*/
+	//Close webcam
 	webcam.release();
 
 	return fingerCountReturn;
@@ -144,7 +138,7 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 				
 				pos = i;
 				//If finger is above hand centre, prevents wrist contours
-				if (centerP.y + 10 >= convexHullPoint[i].y && centerP.y + 10 >= convexHullPoint[pos].y) {
+				if (centerP.y - 50 >= convexHullPoint[i].y && centerP.y - 50 >= convexHullPoint[pos].y) {
 
 					pos = i;
 					//If next finger is at least so far away, prevents duplicate contours on same finger

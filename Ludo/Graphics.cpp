@@ -39,7 +39,7 @@ Graphics::~Graphics()
 void Graphics::mainLoop() {
     if (!glfwInit())
         throw "Could not initialize glwf";
-    window = glfwCreateWindow(1400, 800, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(1400, 800, "Ludo.exe", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -153,13 +153,12 @@ void Graphics::draw()
 
     tigl::shader->enableColor(true);
     tigl::shader->enableTexture(true);
+    tigl::shader->enableAlphaTest(true);
     tigl::shader->enableColorMult(true);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    //drawText("Test", glm::vec3(0));
 
     // Draw all drawables
     for (auto& d : drawables) {

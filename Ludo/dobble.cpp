@@ -166,13 +166,12 @@ int Dobble::findDice() {
         //Remember the last dice roll
         lastDiceCountsV = diceCountsV;
 
-        imshow("Final Image", cameraFrame);
+        imshow("Webcam", cameraFrame);
 
         waitKey(1);
     }
 
     //Cleanup
-    //destroyWindow("Final Image");
     webcam.release();
     
     return diceCountsV.at(0);

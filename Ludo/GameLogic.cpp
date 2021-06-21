@@ -15,7 +15,6 @@ GameLogic::GameLogic(int amountOfPlayers)
 	board = BoardLogic(amountOfPlayers);
 	graphics = Graphics();
 	Dobble d = Dobble(0);
-	
 	HandDetection h = HandDetection(1);
 
 	playerTurn = 0;
@@ -106,12 +105,16 @@ GameLogic::GameLogic(int amountOfPlayers)
 		}
 
 		//change board
+
+		//If no options
 		if (possiblePawns.size() == 0) {
+			//Try again if thrown 6
 			if (diceFound != 6) {
 				nextTurn();
 			}
 			continue;
 		}
+		//No pawns on board
 		else if (possiblePawns[pawnValue] == 99)
 		{
 			//add new pawn on board
