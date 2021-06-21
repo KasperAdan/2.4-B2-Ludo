@@ -1,11 +1,13 @@
 #pragma once
 #include "BoardLogic.h"
 #include <iostream>
+#include <opencv2/core.hpp>
 #include <vector>
 #include <string>
 #include "Pawn.h"
 #include "Graphics.h"
 #include "handDetection.h"
+
 
 class GameLogic
 {

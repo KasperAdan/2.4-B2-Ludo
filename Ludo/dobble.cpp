@@ -1,17 +1,12 @@
-#include <vector>
 #include "dobble.h"
-#include <stdio.h>
-#include <vector>
-#include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/highgui.hpp>
+
 
 using namespace cv;
 using namespace std;
 
 int webcamNr;
 int loop_equal;
-int const TOTAL_LOOPS = 20;
+int const TOTAL_LOOPS = 40;
 vector<int> diceCountsV;
 vector<int> lastDiceCountsV;
 
@@ -177,7 +172,7 @@ int Dobble::findDice() {
     }
 
     //Cleanup
-    destroyWindow("Final Image");
+    //destroyWindow("Final Image");
     webcam.release();
     
     return diceCountsV.at(0);

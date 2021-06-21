@@ -33,7 +33,7 @@ int HandDetection::findFingers() {
 
 	int fingerCountReturn = 0;
 	int previousFingerCount = 0;
-	int fingerLoopsThreshold = 35;
+	int fingerLoopsThreshold = 15;
 	int currentFingerLoops = 0;
 
 	while (1) {
@@ -47,9 +47,9 @@ int HandDetection::findFingers() {
 		inRange(hsvFrame, Scalar(hmin, smin, vmin), Scalar(hmax, smax, vmax), thresholdFrame);
 
 		//Erodes and Dilates for noise reduction
-		imshow("treshold", thresholdFrame);
+		//imshow("treshold", thresholdFrame);
 		noiseReduction(thresholdFrame);
-		imshow("threshold noise reduced", thresholdFrame);
+		//imshow("threshold noise reduced", thresholdFrame);
 
 		//track the hand, put the bounding box around the hand
 		//calculate the center point of the hand
@@ -62,7 +62,7 @@ int HandDetection::findFingers() {
 
 		previousFingerCount = fingerCountReturn;
 
-		imshow("Final Image", cameraFrame);
+		imshow("Hand Detection", cameraFrame);
 
 		//release the memory
 		cameraFrame.release();
@@ -74,9 +74,9 @@ int HandDetection::findFingers() {
 	}
 
 	//Destroy all windows, close webcam
-	destroyWindow("Final Image");
+	/*destroyWindow("Final Image");
 	destroyWindow("treshold");
-	destroyWindow("threshold noise reduced");
+	destroyWindow("threshold noise reduced");*/
 	webcam.release();
 
 	return fingerCountReturn;
@@ -116,8 +116,8 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 		handFound = true;
 		boundRect = boundingRect(contours[largestObj]);
 
-		//draw the boundary of the object
-		drawContours(dest, contours, largestObj, Scalar(0, 0, 255), 3, 8, hierarchy);
+		//draw the boundary of the object //Commented for Demo
+		//drawContours(dest, contours, largestObj, Scalar(0, 0, 255), 3, 8, hierarchy);
 		//find the convex points for the largest object which is hand
 		convexHull(contours[largestObj], convexHullPoint, true, true);
 
@@ -127,12 +127,12 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 		int centerY = moment.m01 / moment.m00;
 		Point centerPoint(centerX, centerY);
 		centerP = centerPoint;
-		Point printPoint(centerX, centerY + 15);
+		Point printPoint(centerX, centerY + 50);
 		Point printPoint1(boundRect.x, boundRect.y);
 		circle(dest, centerPoint, 8, Scalar(255, 0, 0), FILLED);
 
-		//put the BoundingBox in the contour region
-		rectangle(dest, boundRect, Scalar(0, 0, 255), 2, 8, 0);
+		//put the BoundingBox in the contour region //Commented for Demo
+		//rectangle(dest, boundRect, Scalar(0, 0, 255), 2, 8, 0);
 
 		if (handFound) {
 			bool validFinger = false;
@@ -141,7 +141,6 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 
 			int pos = 0;
 			for (int i = 1; i < convexHullPoint.size(); i++) {
-				circle(dest, convexHullPoint[pos], 8, Scalar(255, 0, 0), FILLED);
 				
 				pos = i;
 				//If finger is above hand centre, prevents wrist contours
@@ -168,8 +167,7 @@ int HandDetection::trackHand(Mat src, Mat& dest) {
 				line(dest, centerP, point, Scalar(0, 255, 0), 3, 81, 0);
 				circle(dest, point, 8, Scalar(255, 0, 0), FILLED);
 			}
-			
-			putText(dest, to_string(foundFingers.size()), printPoint, 1, 5, Scalar(0, 255, 0), 1, 5, false);
+			putText(dest, to_string(foundFingers.size()), printPoint, 1, 5, Scalar(255, 0, 0), 5, 5, false);
 		}
 	}
 	
@@ -181,7 +179,7 @@ void HandDetection::noiseReduction(Mat& frame) {
 
 	for (int i = 0; i < 3; i++) { erode(frame, frame, Mat()); }
 	
-	for (int i = 0; i < 4; i++) { dilate(frame, frame, Mat()); }
+	for (int i = 0; i < 5; i++) { dilate(frame, frame, Mat()); }
 
 }
 

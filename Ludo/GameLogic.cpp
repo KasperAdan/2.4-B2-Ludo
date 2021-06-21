@@ -46,7 +46,7 @@ GameLogic::GameLogic(int amountOfPlayers)
 
 		if (diceFound == 6)
 		{
-			if (board.spawnPawnCheck(&board.players[playerTurn]))
+			if (board.players[playerTurn].homePawns > 0 && board.spawnPawnCheck(&board.players[playerTurn]))
 			{
 				possiblePawns.push_back(99);
 			}
@@ -106,7 +106,13 @@ GameLogic::GameLogic(int amountOfPlayers)
 		}
 
 		//change board
-		if (possiblePawns[pawnValue] == 99)
+		if (possiblePawns.size() == 0) {
+			if (diceFound != 6) {
+				nextTurn();
+			}
+			continue;
+		}
+		else if (possiblePawns[pawnValue] == 99)
 		{
 			//add new pawn on board
 			board.spawnPawn(&board.players[playerTurn], graphics);
